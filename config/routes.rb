@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     end
   end
 
-  scope module :public do
+  scope module: :public do
     root 'homes#top'
     get 'homes/about' => 'homes#about', as: 'about'
   end

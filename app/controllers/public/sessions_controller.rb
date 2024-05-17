@@ -1,6 +1,26 @@
 # frozen_string_literal: true
 
 class Public::SessionsController < Devise::SessionsController
+<<<<<<< HEAD
+  # before_action :configure_sign_in_params, only: [:create]
+ 
+  # GET /resource/sign_in
+  # def new
+  #   super
+  # end
+
+  # POST /resource/sign_in
+  # def create
+  #   super
+  # end
+
+  # DELETE /resource/sign_out
+  # def destroy
+  #   super
+  # end
+
+  # protected
+=======
   before_action :customer_state, only: [:create]
   before_action :configure_permitted_parameters, if: :devise_controller?
   # before_action :configure_sign_in_params, only: [:create]
@@ -43,11 +63,13 @@ class Public::SessionsController < Devise::SessionsController
   return unless customer.is_active == true
   redirect_to new_customer_registration_path
   end
+>>>>>>> origin/sakamoto
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+<<<<<<< HEAD
   private 
    def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [
@@ -55,4 +77,17 @@ class Public::SessionsController < Devise::SessionsController
       :postal_code, :address, :telephone_number, :email, :password, :password_confirmation
     ])
    end 
+=======
+<<<<<<< HEAD
+  private
+    def user_state
+      @user=User.find_by(email:params[:user][:email])
+      return if customer.nil?
+      return unless cutomer.valid_password?(params[:user][:password])
+      @user.create
+      render user_sign_up
+    end   
+=======
+>>>>>>> origin/sakamoto
+>>>>>>> d69b0a6a577f4bfacf493168e4d85500223be6fb
 end

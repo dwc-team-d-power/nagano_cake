@@ -26,17 +26,19 @@ Rails.application.routes.draw do
     end
   end
 
-  scope module: :public do
+ scope module: :public do
     root 'homes#top'
-    get 'homes/about' => 'homes#about', as: 'about'
+    get '/about' => 'homes#about', as: 'about'
   end
   scope module: :public do
     resources :items, only: [:index, :show]
   end
   scope module: :public do
-    resources :customers, only: [:show, :edit, :update,]
-    get 'customers/unsubscribe'
-    get 'customers/withdraw'
+    get 'customers/my_page' => 'customers#my_page', as: 'customer_my_page'
+    get 'customers/information/edit' => 'customers#information_edit', as: 'edit_customer_information'
+    patch 'customers/information/edit' => 'customers#update', as: 'update_customer_information/'
+    get 'customers/unsubscribe' => 'customers#unsubscribe', as: 'customer_unsubscribe'
+    patch 'customers/withdraw' => 'customers#withdraw', as: 'customer_withdraw'
   end
   scope module: :public do
     resources :cart_items, only: [:index, :update, :destroy, :create]

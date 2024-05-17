@@ -1,20 +1,6 @@
 # frozen_string_literal: true
 
 class Public::RegistrationsController < Devise::RegistrationsController
-<<<<<<< HEAD
-  # before_action :configure_sign_up_params, only: [:create]
-  # before_action :configure_account_update_params, only: [:update]
-
-  # GET /resource/sign_up
-  # def new
-  #   super
-  # end
-
-  # POST /resource
-  # def create
-  #   super
-  # end
-=======
   before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -27,7 +13,6 @@ class Public::RegistrationsController < Devise::RegistrationsController
   def create
     super
   end
->>>>>>> origin/sakamoto
 
   # GET /resource/edit
   # def edit
@@ -53,19 +38,11 @@ class Public::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-<<<<<<< HEAD
- 
-=======
-<<<<<<< HEAD
-  # protected
-=======
   protected
->>>>>>> d69b0a6a577f4bfacf493168e4d85500223be6fb
   
   def after_sign_up_path_for(resource)
     root_path
   end
->>>>>>> origin/sakamoto
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params

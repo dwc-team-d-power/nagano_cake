@@ -11,74 +11,43 @@ Rails.application.routes.draw do
   namespace :admin do
     root 'homes#top'
   end
-    namespace :admin do
-      resources :items, only: [:index, :new, :create, ]
-    get 'items/index'
-    get 'items/new'
-    get 'items/create'
-    get 'items/show'
-    get 'items/edit'
-    get 'items/update'
-  end
-  
   namespace :admin do
-    get 'order_details/update'
+    resources :items, only: [:index, :new, :create, :show, :edit, :update]
   end
   namespace :admin do
-    get 'orders/show'
-    get 'orders/update'
+    resources :genres, only: [:index, :create, :edit, :update]
   end
   namespace :admin do
-    get 'customers/index'
-    get 'customers/show'
-    get 'customers/edit'
-    get 'customers/update'
+    resources :customers, only: [:index, :show, :edit, :update]
   end
   namespace :admin do
-    get 'genres/index'
-    get 'genres/create'
-    get 'genres/edit'
-    get 'genres/update'
+    resources :orders, only: [:show, :update] do
+      resources :order_details, only: [:update]
+    end
   end
 
-
-  
-  namespace :public do
-    get 'addresses/index'
-    get 'addresses/edit'
-    get 'addresses/create'
-    get 'addresses/update'
-    get 'addresses/destroy'
+  scope module :public do
+    root 'homes#top'
+    get 'homes/about' => 'homes#about', as: 'about'
   end
-  namespace :public do
-    get 'orders/new'
-    get 'orders/confirm'
-    get 'orders/thanks'
-    get 'orders/create'
-    get 'orders/index'
-    get 'orders/show'
+  scope module: :public do
+    resources :items, only: [:index, :show]
   end
-  namespace :public do
-    get 'cart_items/index'
-    get 'cart_items/update'
-    get 'cart_items/destroy'
-    get 'cart_items/destroy_all'
-    get 'cart_items/create'
-  end
-  namespace :public do
-    get 'customers/show'
-    get 'customers/edit'
-    get 'customers/update'
+  scope module: :public do
+    resources :customers, only: [:show, :edit, :update,]
     get 'customers/unsubscribe'
     get 'customers/withdraw'
   end
-  namespace :public do
-    get 'items/index'
-    get 'items/show'
+  scope module: :public do
+    resources :cart_items, only: [:index, :update, :destroy, :create]
+    get 'cart_items/destroy_all'
   end
-  namespace :public do
-    get 'homes/top'
-    get 'homes/about'
+  scope module: :public do
+    resources :orders, only: [:new, :create, :index, :show]
+    get 'orders/confirm'
+    get 'orders/thanks'
   end
-
+  scope module: :public do
+    resources :addresses, only: [:index, :edit, :create, :update, :destroy]
+  end
 end

@@ -7,7 +7,7 @@
       <li><%= link_to 'マイページ', admin_items_path, class: 'btn btn-outline-secondary' %></li>
       <li><%= link_to '商品一覧', admin_customers_path, class: 'btn btn-outline-secondary' %></li>
       <li><%= link_to 'カート', admin_root_path, class: 'btn btn-outline-secondary'%></li>
-      <li><%= link_to 'ログアウト', admin_genres_path, class: 'btn btn-outline-secondary'%></li>
+      <li><%= link_to 'ログアウト', root_path, class: 'btn btn-outline-secondary'%></li>
     <% else %>
       <li><%= link_to 'about', about_path, class: 'btn btn-outline-secondary' %></li>
       <li><%= link_to '商品一覧', items_path, class: 'btn btn-outline-secondary' %></li>
@@ -21,10 +21,4 @@
       <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
   </div>
-  <!--customer.sign_in?-->
-    <!--マイページ-->
-    <!--商品一覧-->
-    <!--カート-->
-    <!--ログアウト-->
-
 </div>

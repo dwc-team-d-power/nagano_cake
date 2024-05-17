@@ -28,13 +28,15 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root 'homes#top'
-    get 'homes/about' => 'homes#about', as: 'about'
+    get '/about' => 'homes#about', as: 'about'
   end
   scope module: :public do
     resources :items, only: [:index, :show]
   end
   scope module: :public do
-    resources :customers, only: [:show, :edit, :update,]
+    get 'customers/my_page' => 'customers#show'
+    get 'customers/information/edit' => 'customers#edit'
+    get 'customers/information' => 'customers#update'
     get 'customers/unsubscribe'
     get 'customers/withdraw'
   end

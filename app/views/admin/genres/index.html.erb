@@ -1,16 +1,16 @@
 <div class="container-fluid">
   <div class="row">
-    <h5 class="mx-5 my-4">
+    <h5 class="col-4 text-center my-4">
       <span class="px-3" style="background-color: #dcdcdc;">ジャンル一覧・追加</span>
     </h5>
   </div>
-  <div class="row my-5">
-    <div class="form-group">
-      <%= form_with model: @genre, url:'/admin/genres' do |f| %>
+  <div class="row">
+    <div class="col-4 my-4 form-group">
+      <%= form_with model: @genre, url:admin_genres_path do |f| %>
         <div class="form-inline">
           <p class="mx-3 my-1">ジャンル名</p>
-          <%= f.text_field :name,class: "form-control mx-2", placeholder: "ジャンル名", size: 20 %>
-          <%= f.submit '新規登録', class:'btn btn-success' %>
+          <%= f.text_field :name, class: "form-control mx-2", placeholder: "ジャンル名", size: 20 %>
+          <%= f.submit '新規登録', class:'btn btn-success mx-2' %>
         </div>
       <% end %>
     </div>

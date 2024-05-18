@@ -1,5 +1,5 @@
 class Admin::GenresController < ApplicationController
-  # before_action :authenticate_admin!
+  # before_action :authenticate_admin! 開発時オフにしてます
   
   def index
     @genre = Genre.new

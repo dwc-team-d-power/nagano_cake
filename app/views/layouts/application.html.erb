@@ -1,11 +1,4 @@
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/sakamoto
->>>>>>> d69b0a6a577f4bfacf493168e4d85500223be6fb
 <!DOCTYPE html>
 <html>
   <head>
@@ -19,6 +12,7 @@
   </head>
 
   <body>
+    <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, data: { confirm: "本当にログアウトしますか?" }, class: "btn btn-danger" %>
     <%= yield %>
   </body>
 </html>

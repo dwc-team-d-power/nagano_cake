@@ -23,11 +23,11 @@ class Public::SessionsController < Devise::SessionsController
   protected
   
   def after_sign_in_path_for(resource)
-    customer_my_page_path(resource)
+    customer_my_page_path
   end
   
   def after_sign_out_path_for(resource)
-    public_homes_top_path
+    root_path
   end
   
   private
@@ -40,7 +40,7 @@ class Public::SessionsController < Devise::SessionsController
   # 【処理内容3】 取得したアカウントのパスワードと入力されたパスワードが一致していない場合、このメソッドを終了する
   return unless customer.valid_password?(params[:customer][:password])
   # 【処理内容4】 アクティブでない会員に対する処理
-  return unless customer.is_active == true
+  return unless customer.is_active ==false
   redirect_to new_customer_registration_path
   end
   protected 

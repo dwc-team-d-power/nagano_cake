@@ -5,11 +5,11 @@
     </nav>
     <nav>
       <ul class="nav navbar-nav navbar-right">
-        <!--% if admin_user? %>-->
-        <!--  %= render 'layouts/admin_header' %>-->
-        <!--% else %>-->
-        <!--  %= render 'layouts/customer_header' %>-->
-        <!--% end %>v>-->
+        <% if admin_user? %>
+          <%= render 'layouts/admin_header' %>
+        <% else %>
+          <%= render 'layouts/customer_header' %>
+        <% end %>v>
       </ul>
     </nav>
   </div>

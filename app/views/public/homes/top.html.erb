@@ -1,0 +1,15 @@
+<div class="container">
+<h1>ようこそながのCAKEへ！
+    このサイトは、ケーキ販売のECサイトになります。
+    会員でない方も商品の閲覧はできますが、購入には会員登録が必要になります。</h1>
+<div class="row">
+    <%= render 'public/items/genre', genres: @genres %>
+</div>    
+ <h3>新着商品</h3>
+    <%= @items.each do |item| %>
+    <%= link_to item.name,items_path%>
+    <%= item.image%>
+    <%= item.price%>
+    <% end %> 
+    <%= link_to "全ての商品",items_path%>
+</div>   

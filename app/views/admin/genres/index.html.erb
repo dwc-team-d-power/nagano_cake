@@ -4,6 +4,7 @@
       <span class="px-3" style="background-color: #dcdcdc;">ジャンル一覧・追加</span>
     </h5>
   </div>
+  
   <div class="row">
     <div class="col-4 my-4 form-group">
       <%= form_with model: @genre, url:admin_genres_path do |f| %>
@@ -15,6 +16,21 @@
       <% end %>
     </div>
   </div>
+  
+  <div class="row">
+    <div class="col-6 my-4">
+      <form method="post" >
+        <div class="form-group row">
+          <label for="inputgenre" class="col-3 mx-2 col-form-label">ジャンル名</label>
+          <div class="col-6">
+            <input id="inputgenre" class="form-control" type="name" placeholder="ジャンル名">
+          </div>
+          <button type="submit" class="btn btn-success ml-auto">新規登録</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
   <div class="row mt-5">
     <div class="col-4">
       <table class="table">

@@ -11,7 +11,7 @@ class Public::CartItemsController < ApplicationController
   end
 
   def destroy
-    @cart_item = Cartitem.find(params[:id])
+    @cart_item = CartItem.find(params[:id])
     @cart_item.destroy
   end
 

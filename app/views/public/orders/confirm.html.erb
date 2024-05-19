@@ -1,2 +1,23 @@
-<h1>Public::Orders#confirm</h1>
-<p>Find me in app/views/public/orders/confirm.html.erb</p>
+<h1>注文情報確認</h1>
+<% @orders.each do |order| %>
+<tabel>
+    <tr>商品名</tr>
+    <td><%= order.cart_items.name%></td>
+    <tr>単価(税込)</tr>
+    <td><%= order.cart_items.item.with_tax_price %></td>
+    <tr>小計</tr>
+    <tr><%= order.cart_items.total_amount %></tr>
+</tabel>
+
+<tabel>
+    <tr>送料</tr>
+    <td><%= shipping_cost %></td>
+    <tr>商品合計</tr>
+    <td><%= @total_payment %></tr>
+    <tr>請求金額</tr>
+    <td><%=@total_payment+shipping_cost%></td>
+</tabel>
+<h4>支払方法</h4>
+<%= @orders.payment_method %>
+<h4>お届け先</h4>
+<%= @orders.postal_code %> 

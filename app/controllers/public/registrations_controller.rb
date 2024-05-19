@@ -4,12 +4,12 @@ class Public::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
-  GET /resource/sign_up
+  # GET /resource/sign_up
   def new
     super
   end
 
-  POST /resource
+  # POST /resource
   def create
     super
   end
@@ -41,12 +41,13 @@ class Public::RegistrationsController < Devise::RegistrationsController
   protected
   
   def after_sign_up_path_for(resource)
-    public_customers_show_path
+   customer_my_page_path(resource)
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name,:first_name, :last_name, :first_name_kana, :last_name_kana, 
+      :postal_code, :address, :telephone_number, :email, :password, :password_confirmation])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
@@ -63,4 +64,11 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+ protected
+   def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [
+      :first_name, :last_name, :first_name_kana, :last_name_kana, 
+      :postal_code, :address, :telephone_number, :email, :password, :password_confirmation
+    ])
+  end
 end

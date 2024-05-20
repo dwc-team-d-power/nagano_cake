@@ -1,11 +1,11 @@
 class Public::CustomersController < ApplicationController
   before_action :authenticate_customer!
   
-  def my_page
+  def show
     @customer = current_customer
   end
 
-  def information_edit
+  def edit
     @customer = current_customer
   end
 
@@ -29,7 +29,9 @@ class Public::CustomersController < ApplicationController
     flash[:notice]="退会処理を実行いたしました"
     redirect_to root_path
   end
-  private   
+  
+  private
+  
   def customer_params
     params.require(:customer).permit(:first_name,:last_name,:first_name_kana,:last_name_kana,:postal_code,:telephone_number,:email)
   end   

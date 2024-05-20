@@ -1,10 +1,6 @@
 <h2>Log in</h2>
 
-<<<<<<< HEAD
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-=======
 <%= form_with model: @admin, url: admin_session_path do |f| %>
->>>>>>> origin/sakamoto
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>

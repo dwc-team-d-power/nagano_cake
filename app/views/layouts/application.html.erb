@@ -12,7 +12,10 @@
   </head>
 
   <body>
-    <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, data: { confirm: "本当にログアウトしますか?" }, class: "btn btn-danger" %>
-    <%= yield %>
+    <%= render 'layouts/header' %>
+    <div>
+      <%= yield %>
+    </div>
+    <%= render 'layouts/footer' %>
   </body>
 </html>

@@ -1,0 +1,28 @@
+<div class="col-4">
+  <!--オフセット？-->
+</div>
+<div class="col-8">
+  <div class="row">
+    <% if admin_signed_in? %>
+      <li><%= link_to '商品一覧', admin_items_path, class: 'btn btn-outline-secondary' %></li>
+      <li><%= link_to '会員一覧', admin_customers_path, class: 'btn btn-outline-secondary' %></li>
+      <li><%= link_to '注文履歴一覧', admin_root_path, class: 'btn btn-outline-secondary'%></li>
+      <li><%= link_to 'ジャンル一覧', admin_genres_path, class: 'btn btn-outline-secondary'%></li>
+      <li><%= link_to 'ログアウト', new_admin_session_path, class: 'btn btn-outline-secondary' %></li>
+    <% else %>
+      <li><%= link_to 'about', about_path, class: 'btn btn-outline-secondary' %></li>
+      <li><%= link_to '商品一覧', items_path, class: 'btn btn-outline-secondary' %></li>
+      <li><%= link_to '新規登録', new_customer_registration_path, class: 'btn btn-outline-secondary' %></li>
+      <li><%= link_to 'ログイン', new_customer_session_path, class: 'btn btn-outline-secondary'%></li>
+    <% end %>
+  </div>
+  <div class="row">
+    <form class="d-flex" role="search">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div>
+</div>
+
+
+

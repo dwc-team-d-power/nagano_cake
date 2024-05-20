@@ -1,12 +1,12 @@
 <div class="container-fluid">
   <div class="row">
     <h5 class="col-4 text-center my-4">
-      <span class="px-3" style="background-color: #dcdcdc;">配送先登録/一覧</span>
+      <span class="px-3" style="background-color: #dcdcdc;">注文情報入力</span>
     </h5>
   </div>
   <div class="row">
     <div class="col-10 mx-auto">
-      <%= form_with model: @order, url:orders_path do |f| %>
+      <%= form_with model: @order, url:orders_confirm_path do |f| %>
       <h5>支払方法</h5>
       <div class="ml-3">
         <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>

@@ -1,7 +1,14 @@
-<%= render 'genre',genres:@genre%>
-<%= items.image%>
-<%= items.name%>
-<%= items.price%>(税込)
-<%= form_with model: @amount do |f|%>
- <%= f.select :amount,*[1..5]%>
- <%= f.submit 'カートに入れる'%>
+<%= render 'genre', genres: @genres %>
+<% if @item.image.attached? %>
+  <%= image_tag @item.image, class: "img-thumbnail", size: "150x150" %>
+<% else %>
+  <%= image_tag "no_image.jpeg", class: "img-thumbnail", size: "150x150" %>
+<% end %>
+<%= @item.name %>
+<%= @item.price %>(税込)
+<%= form_with model: @cart_item, url: public_cart_items_path, local: true do |f| %>
+  <%= f.hidden_field :item_id, value: @item.id %>
+  <%= f.label :amount, "数量" %>
+  <%= f.select :amount, (1..5).to_a %>
+  <%= f.submit "カートに入れる", class: "btn btn-primary" %>
+<% end %>

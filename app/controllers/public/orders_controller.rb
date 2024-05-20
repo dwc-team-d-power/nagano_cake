@@ -4,11 +4,11 @@ class Public::OrdersController < ApplicationController
   def new
     @cart_items = current_customer.id
     @orderes = @cart_items
-    @orderes = Orders.new
+    @orderes = Order.new
   end
 
   def confirm
-    @orderes = Orders.new(orders_params)
+    @orderes = Order.new(orders_params)
     if @orderes.customer_id = current_customer.id
        @orderes.save
        flash[:notice] ="注文に成功しました"
@@ -24,7 +24,7 @@ class Public::OrdersController < ApplicationController
 
   def index
     @orders = current_customer.id
-    @orders = Orderes.all 
+    @orders = Order.all 
   end
 
   def show

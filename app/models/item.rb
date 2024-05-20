@@ -7,11 +7,9 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   validates :name, presence: true
-  validates :description, presence: true
-  validates :genre, presence: true
-  validates :price_excluding_tax, presence: true, numericality: { only_integer: true, greater_than: 0 }
-    belongs_to :genre
-    belongs_to :cart_item
+  validates :introduction, presence: true
+  validates :genre_id, presence: true
+  validates :price, presence: true, numericality: { only_integer: true, greater_than: 0 }
     has_one_attached :image
     def with_tax_price
         (price*1.1).floor

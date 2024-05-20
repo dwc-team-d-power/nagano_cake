@@ -2,7 +2,7 @@ class Public::CartItemsController < ApplicationController
   before_action :authenticate_customer!
   
   def index
-    @cart_item = current_customer.cart_items
+    @cart_items = current_customer.cart_items
   end
 
   def update
@@ -16,11 +16,18 @@ class Public::CartItemsController < ApplicationController
   end
 
   def destroy_all
-    current.customer.cart_items.destroy_all
+    current_customer.cart_items.destroy_all
+    redirect_to cart_items_path, notice: 'カート内の商品を全て削除しました'
   end
 
-  def create
-  end
+   def create
+    @cart_item = current_customer.cart_items.new(cart_item_params)
+    if @cart_item.save
+      redirect_to public_cart_items_path, notice: 'カートに商品を追加しました。'
+    else
+      render 'public/items/show'
+    end
+   end
   
   private
     def cart_item_params

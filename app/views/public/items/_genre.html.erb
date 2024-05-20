@@ -1,10 +1,9 @@
 <% if genres.present? %>
-  <% genres.each do |genre| %>
-    <div class="col-md-4">
-      <h2><%= genre.name %></h2>
+  <div class="genres">
+    <% genres.each do |genre| %>
       <%= link_to genre.name, items_path(genre_id: genre.id) %>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 <% else %>
   <p>ジャンルが見つかりませんでした。</p>
 <% end %>

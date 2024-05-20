@@ -6,24 +6,16 @@ Rails.application.routes.draw do
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
   }
-  devise_for :customers,skip: [:passwords], controllers: {
-  registrations: "public/registrations",
-  sessions: 'public/sessions'
+  devise_for :customers, skip: [:passwords], controllers: {
+    registrations: "public/registrations",
+    sessions: 'public/sessions'
   }
-  
+
   namespace :admin do
     root 'homes#top'
-  end
-  namespace :admin do
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
-  end
-  namespace :admin do
     resources :genres, only: [:index, :create, :edit, :update]
-  end
-  namespace :admin do
     resources :customers, only: [:index, :show, :edit, :update]
-  end
-  namespace :admin do
     resources :orders, only: [:show, :update] do
       resources :order_details, only: [:update]
     end

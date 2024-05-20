@@ -23,8 +23,11 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
+    @orders = current_customer.id
+    @orders = Orderes.all 
   end
 
   def show
+    @order = Orders.find([params:id])
   end
 end

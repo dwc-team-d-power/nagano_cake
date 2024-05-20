@@ -1,11 +1,11 @@
 class Item < ApplicationRecord
-
-  has_many :cart_items
-    has_many :ordered_items
-    attachment :image
     belongs_to :genre
-
-    enum sales_status: { on_sale: 0, off_sale: 1 }
-
-
+    has_many :cart_item
+    has_many :order_details
+    
+    has_one_attached :image
+    
+    def with_tax_price
+        (price*1.1).floor
+    end    
 end

@@ -1,0 +1,7 @@
+<h1>商品一覧</h1> <p>(全<%=@items.count%>件)</p>
+<%= render 'genre',genres:@genre%>
+<% @items.each do |item|%>
+ <%= item.image%>
+ <%= item.name%>
+ <%= item.with_tax_price%>
+<% end %> 

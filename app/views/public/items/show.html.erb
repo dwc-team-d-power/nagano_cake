@@ -1,0 +1,7 @@
+<%= render 'genre',genres:@genre%>
+<%= items.image%>
+<%= items.name%>
+<%= items.price%>(税込)
+<%= form_with model: @amount do |f|%>
+ <%= f.select :amount,*[1..5]%>
+ <%= f.submit 'カートに入れる'%>

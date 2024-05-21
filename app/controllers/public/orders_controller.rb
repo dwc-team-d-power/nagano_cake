@@ -2,11 +2,7 @@ class Public::OrdersController < ApplicationController
   def new
     @order = Order.new
     @addresses = current_customer.addresses
-    @addresses = current_customer.address
-    @addresses = current_customer.postal_code
-    @addresses = current_customer.name
   end
-
   def confirm
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
@@ -28,16 +24,12 @@ class Public::OrdersController < ApplicationController
      @order.total_payment = calculate_total_payment(@order)
     if @order.save
       redirect_to thanks_orders_path
-    else
-      render :new
     end
   end
-
-  # # def create
-  # #   @order = Order.new(order_params)
-  # #   @order = Order.find(params[:order_id])
-  # end
-
+    def create
+    @order = Order.new(order_params)
+    @order.customer_id = current_customer.id
+  end
   def show
     @order = Order.find(params[:id])
   end

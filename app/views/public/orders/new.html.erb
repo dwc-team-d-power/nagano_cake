@@ -1,5 +1,5 @@
 <h1>注文情報入力</h1>
-<%= form_with model: @order, url: confirm_public_orders_path, method: :post, local: true do |f| %>
+<%= form_with model: @order, url: confirm_orders_path, method: :post, local: true do |f| %>
   <div class="form-group">
     <%= f.label :payment_method, "支払い方法" %><br>
     <div class="form-check">

@@ -31,6 +31,7 @@ class Public::OrdersController < ApplicationController
     @cart_items = current_customer.cart_items.all
     @total = @cart_items.inject(0) { |sum, item| sum + item.subtotal }
     # inject(0)初期値は0、{|初期値, 要素| ブロック処理 }itemはcart_itemに変更?
+    @total_payment = @order.shipping_cost + @total
     
   end
 
@@ -38,8 +39,21 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
-    @cart_items = current_customer.cart_items.all
     @order = current_customer.orders.new(order_params)
+    @order.save
+    @cart_items = current_customer.cart_items.all
+    
+    @cart_items.each do |cart_item|
+      @order_details = OrderDetail.new
+      @order_details.order_id = order.id
+      @order_details.item_id = cart_item.item.id
+      @order_details.price = cart_item.item.with_tax_price
+      @order_details.amount = cart_item.amount
+      @order_details.save
+    end
+    
+    CartItem.destroy_all
+    redirect_to orders_thanks_path
   end
 
   def index

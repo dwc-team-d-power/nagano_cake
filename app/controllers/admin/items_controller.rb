@@ -1,6 +1,6 @@
 class Admin::ItemsController < ApplicationController
-  #before_action :authenticate_admin!
-  #before_action :set_item, only: [:show, :edit, :update]
+  # before_action :authenticate_admin!
+  before_action :set_item, only: [:show, :edit, :update]
 
   def index
     @items = Item.page(params[:page]).per(10)
@@ -22,9 +22,11 @@ class Admin::ItemsController < ApplicationController
   end
 
   def show
+    @item = Item.find(params[:id])
   end
 
   def edit
+    @item = Item.find(params[:id])
   end
 
   def update
@@ -44,6 +46,6 @@ class Admin::ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:name, :genre_id, :non_taxed_price, :sales_status, :image, :description)
+    params.require(:item).permit(:name, :genre_id, :price, :is_active, :image, :introduction)
   end
 end

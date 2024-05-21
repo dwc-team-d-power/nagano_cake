@@ -8,8 +8,11 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   validates :name, presence: true
-  validates :description, presence: true
+  validates :introduction, presence: true
   validates :genre, presence: true
-  validates :price_excluding_tax, presence: true, numericality: { only_integer: true, greater_than: 0 }
+  validates :price, presence: true, numericality: { only_integer: true, greater_than: 0 }
 
+  def with_tax_price
+    (price * 1.1).floor
+  end
 end

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  
+
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
   }
@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   registrations: "public/registrations",
   sessions: 'public/sessions'
   }
-  
+
   namespace :admin do
     root 'homes#top'
   end
@@ -37,12 +37,12 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :show]
   end
   scope module: :public do
-    get 'customers/my_page' => 'customers#show'
-    get 'customers/information/edit' => 'customers#edit'
-    get 'customers/information' => 'customers#update'
-    get 'customers/unsubscribe'
-    get 'customers/withdraw'
-    
+    # get 'customers/my_page' => 'customers#show'
+    # get 'customers/information/edit' => 'customers#edit'
+    # get 'customers/information' => 'customers#update'
+    # get 'customers/unsubscribe'
+    # get 'customers/withdraw'
+
     get 'customers/my_page' => 'customers#my_page', as: 'customer_my_page'
     get 'customers/information/edit' => 'customers#information_edit', as: 'edit_customer_information'
     patch 'customers/information/edit' => 'customers#update', as: 'update_customer_information/'
@@ -54,11 +54,11 @@ Rails.application.routes.draw do
     get 'cart_items/destroy_all'
   end
   scope module: :public do
+    post 'orders/confirm' => 'orders#confirm', as: 'orders_confirm'
+    get 'orders/thanks' => 'orders#thanks', as: 'orders_thanks'
     resources :orders, only: [:new, :create, :index, :show]
-    get 'orders/confirm'
-    get 'orders/thanks'
   end
   scope module: :public do
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
   end
-end 
+end

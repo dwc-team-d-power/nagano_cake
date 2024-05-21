@@ -27,7 +27,8 @@
           <%= f.radio_button :shipping_address, 2 %>
           <%= f.label :shipping_address, "登録済住所から選択" %>
           <div class="ml-3">
-          <%= f.select :address_id, options_from_collection_for_select(current_customer.address.all, :id, :address_display) %>
+          <%= f.select :address_id, options_from_collection_for_select(current_customer.addresses.all, :id, :address_display) %>
+          <!--address_idはorderコントローラで使う address_displayはaddressモデルに定義している-->
           </div>
         </div>
         <div>

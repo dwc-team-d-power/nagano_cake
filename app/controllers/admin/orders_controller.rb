@@ -1,5 +1,5 @@
-class Admins::OrdersController < ApplicationController
-  before_action :authenticate_admin!
+class Admin::OrdersController < ApplicationController
+ # before_action :authenticate_admin!
 
   def index
     @orders = Order.all
@@ -8,20 +8,20 @@ class Admins::OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @customer = @order.customer
-    @order = @order.order_products
-    @order_product = OrderProduct.find(@admins_order.id)
+    @ordered_items = @order.ordered_items
+    @ordered_item = OrderedItem.find(@order.id)
   end
 
 
   def update
-    @admins_order = Order.find(params[:id])
-       if @admins_order.update(order_params)
-      redirect_to admins_orders_path, notice: 'ユーザ情報を更新しました。'
+    @order = Order.find(params[:id])
+   if @order.update(order_params)
+      redirect_to admin_orders_path, notice: 'ユーザ情報を更新しました。'
    else
       render :show
-    @user = @admins_order.user
-    @order_products = @admins_order.order_products
-    @order_product = OrderProduct.find(@admins_order.id)
+    @customer = @order.user
+    @ordered_items = @order.ordered_items
+    @ordered_item = OrderedItem.find(@order.id)
    end
 
   end
@@ -29,7 +29,7 @@ class Admins::OrdersController < ApplicationController
 private
 
   def order_params
-    params.require(:order).permit(:user_id, :total_charge, :purchase_date, :payment_method, :order_status, :postage, :destination_address, :destination_name, :destination_postal_code)
+    params.require(:order).permit(:customer_id, :total_charge, :purchase_date, :payment_method, :order_status, :postage, :destination_address, :destination_name, :destination_postal_code)
   end
 
 end

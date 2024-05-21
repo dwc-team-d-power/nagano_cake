@@ -9,16 +9,15 @@
           <% if customer_signed_in? %>
             <p class="mt-4">ようこそ、<%= current_customer.last_name %>さん！</p>
           <% else %>
-            
+            <!-- ログインしていない場合の処理 -->
           <% end %>
         </div>
         <div class="col-4">
-
           <div class="row">
             <ul class="nav">
               <% if admin_signed_in? %>
                 <%= render 'layouts/admin_header' %>
-              <% elsif customer_signed_in?%>
+              <% elsif customer_signed_in? %>
                 <%= render 'layouts/customer_header' %>
               <% else %>
                 <%= render 'layouts/before_signin_header' %>

@@ -21,29 +21,30 @@ Rails.application.routes.draw do
   scope module: :public do
     root 'homes#top'
     get 'homes/about', as: 'about'
-    
+
     resources :items, only: [:index, :show]
-    
+
     resources :customers, only: [:show, :edit, :update] do
       collection do
         get 'unsubscribe'
         patch 'withdraw'
+        get 'my_page', to: 'customers#show', as: 'my_page'
       end
     end
-    
+
     resources :cart_items, only: [:index, :update, :destroy, :create] do
       collection do
         delete 'destroy_all'
       end
     end
-    
+
     resources :orders, only: [:new, :create, :index, :show] do
       collection do
         get 'confirm'
         get 'thanks'
       end
     end
-    
+
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
   end
 end

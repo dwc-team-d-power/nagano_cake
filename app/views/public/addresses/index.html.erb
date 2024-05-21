@@ -1,2 +1,81 @@
-<h1>Public::Addresses#index</h1>
-<p>Find me in app/views/public/addresses/index.html.erb</p>
+<div class="container-fluid">
+  <div class="row">
+    <h5 class="col-4 text-center my-4">
+      <span class="px-3" style="background-color: #dcdcdc;">配送先登録/一覧</span>
+    </h5>
+  </div>
+
+  <div class="row">
+    <div class="col-8 my-4 mx-4">
+      <%= form_with model: @address, url:addresses_path do |f| %>
+        <table class="table table-borderless">
+          <tr>
+            <th><%= f.label :posal_code, "郵便番号(ハイフンなし)" %></th>
+            <td><%= f.text_field :postal_code, placeholder: "0000000", size: 20 %></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th><%= f.label :address, "住所" %></th>
+            <td><%= f.text_field :address, placeholder: "東京都渋谷区代々木神園町0-0", size: 60 %></td>
+            <td></td>
+          </tr>
+          <tr>
+            <th><%= f.label :name, "宛名" %></th>
+            <td><%= f.text_field :name, placeholder: "令和道子", size: 20 %></td>
+            <td><%= f.submit '新規登録', class:'btn btn-success ml-auto' %></td>
+          </tr>
+        </table>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="row mt-5">
+    <div class="col-8">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th class="col-2">郵便番号</th>
+            <th class="col-5">住所</th>
+            <th class="col-2">宛名</th>
+            <th class="col-3"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @addresses.each do |address| %>
+            <tr>
+              <td><%= address.postal_code %></td>
+              <td><%= address.address %></td>
+              <td><%= address.name %></td>
+              <td>
+                <%= link_to "編集する", edit_address_path(address), class:'btn btn-success' %>
+                <%= link_to "削除する", address_path(address),method: :delete, class:'btn btn-danger', "data-confirm" => "本当に消去しますか?" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!--form_inlineで横並びにすると揃わないのでテーブルを使う-->
+  <!--<div class="row">-->
+  <!--  <div class="col-8 my-4 form-group">-->
+  <!--    <%= form_with model: @address, url:addresses_path do |f| %>-->
+  <!--    <div class="form-inline mx-3 my-1">-->
+  <!--      <%= f.label :posal_code, "郵便番号(ハイフンなし)" %>-->
+  <!--      <%= f.text_field :postal_code, class: "form-control mx-4", placeholder: "0000000", size: 40 %>-->
+  <!--    </div>-->
+  <!--    <div class="form-inline mx-3 my-1">-->
+  <!--      <%= f.label :address, "住所" %>-->
+  <!--      <%= f.text_field :address, class: "form-control mx-4", placeholder: "東京都渋谷区代々木神園町0-0", size: 60 %>-->
+  <!--    </div>-->
+  <!--    <div class="form-inline mx-3 my-1">-->
+  <!--      <%= f.label :name, "宛名" %>-->
+  <!--      <%= f.text_field :name, class: "form-control mx-4", placeholder: "令和道子", size: 40 %>-->
+  <!--      <%= f.submit '新規登録', class:'btn btn-success ml-auto' %>-->
+  <!--    </div>-->
+  <!--    <% end %>-->
+  <!--  </div>-->
+  <!--</div>-->

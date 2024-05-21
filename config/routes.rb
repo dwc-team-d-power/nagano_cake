@@ -20,16 +20,16 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root 'homes#top'
-    get 'homes/about', as: 'about'
+    get 'about', to: 'homes#about', as: 'about'
 
     resources :items, only: [:index, :show]
 
-    resources :customers, only: [:show, :edit, :update] do
-      collection do
-        get 'unsubscribe'
-        patch 'withdraw'
-        get 'my_page', to: 'customers#show', as: 'my_page'
-      end
+    resource :customer, only: [] do
+      get 'my_page', to: 'customers#show', as: 'my_page'
+      get 'information/edit', to: 'customers#edit', as: 'edit_information'
+      patch 'information', to: 'customers#update', as: 'information'
+      get 'unsubscribe', to: 'customers#unsubscribe', as: 'unsubscribe'
+      patch 'withdraw', to: 'customers#withdraw', as: 'withdraw'
     end
 
     resources :cart_items, only: [:index, :update, :destroy, :create] do
@@ -40,7 +40,7 @@ Rails.application.routes.draw do
 
     resources :orders, only: [:new, :create, :index, :show] do
       collection do
-        get 'confirm'
+        post 'confirm'
         get 'thanks'
       end
     end

@@ -6,7 +6,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
-    super
+     super
   end
 
   # POST /resource
@@ -70,5 +70,5 @@ class Public::RegistrationsController < Devise::RegistrationsController
       :first_name, :last_name, :first_name_kana, :last_name_kana, 
       :postal_code, :address, :telephone_number, :email, :password, :password_confirmation
     ])
-  end
+   end
 end

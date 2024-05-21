@@ -1,24 +1,55 @@
 <div class="container">
-  <h1><strong>会員詳細画面</strong></h1>
-
-
-  <h3>顧客ID       <%= @admins_customer.id %><strong>
-
-  </strong></h3>
-  <h3>氏名       <%= @admins_customer.last_name %><%= @admins_customer.first_name %></h3>
-  <h3>フリガナ    <%= @admins_customer.last_name_kana %><%= @admins_customer.first_name_kana %></h3>
-  <h3>郵便番号       <%= @admins_customer.postal_code %></h3>
-  <h3>住所        <%= @admins_customer.user_address %></h3>
-  <h3>電話番号    <%= @admins_customer.tele_number %></h3>
-  <h3>メールアドレス    <%= .email %></h3>
+  <div class="row">
+    <div class="col">
+      <h4><p><span class="p-0.5 bg-secondary"><%= @customer.full_name %>さんの会員詳細</span></p></h4>
+      <div class="d-flex align-items-center">
+        <table class="table table-borderless">
+          <tr>
+            <th>会員ID</td>
+            <td><%= @customer.id %></td>
+          </tr>
+          <tr>
+            <th>氏名</td>
+            <td><%= @customer.last_name %>　<%= @customer.first_name %></td>
+          </tr>
   
-   <% if @admins_customer.deleted_at.nil? %>
-      <td>有効</td>
-    <% else %>
-      <td>無効</td>
-    <% end %>
-    
-  <%= link_to "編集する", edit_admins_customer_path(@admins_customer), data: {"turbolinks" => false}, class: "btn btn-primary" %>
-  <%= link_to "注文履歴一覧を見る", admins_orders_path, data: {"turbolinks" => false}, class: "btn btn-primary" %>
+          <tr>
+            <th>フリガナ</th>
+            <td><%= @customer.last_name_kana %>　<%= @customer.first_name_kana %></td>
+          </tr>
+  
+          <tr>
+            <th>郵便番号</th>
+            <td><%= @customer.postcode %></td>
+          </tr>
+  
+          <tr>
+            <th>住所</th>
+            <td><%= @customer.address %></td>
+          </tr>
+  
+          <tr>
+            <th>電話番号</th>
+            <td><%= @customer.phone_number %></td>
+          </tr>
+  
+          <tr>
+            <th>メールアドレス</th>
+            <td><%= @customer.email %></td>
+          </tr>
 
+          <tr>
+            <th>会員ステータス</th>
+            <th><%= @customer.customer_status %></th>
+          </tr>
+
+          <tr>
+            <td></td>
+            <td><%= link_to "編集する", edit_admin_customer_path, class:"btn btn-success" %>
+            <%= link_to "注文履歴一覧を見る", "#", class:"btn btn-primary" %></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,30 +1,65 @@
 <div class="container">
-  <h1>会員情報編集</h1>
-    <h3>会員ID  <%= @admins_customer.id %></h3>
-      <%= form_for @admins_customer, :url => { :controller => :users, :action => :update } do |f| %>
-        <% if @admins_customer.errors.any? %>
-          <div id="error_explanation" class="alert alert-danger">
-            <h3><%= @admins_customer.errors.count %>error prohibited this obj from being saved:</h3>
-            <ul>
-              <% @admins_customer.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-            </ul>
-          </div>
+  <div class="row">
+    <div class="col">
+      <h4><p><span class="p-0.5 bg-secondary"><%= @customer.full_name %>さんの会員情報編集</span></p></h4>
+      <table class="table table-borderless">
+        <%= form_with model: [:admin, @customer] do |f| %>
+        <tr>
+          <td>会員ID</td>
+          <td><%= @customer.id %></td>
+        </tr>
+        
+        <tr>
+          <td>氏名</td>
+          <td><%= f.text_field :last_name %>　<%= f.text_field :first_name %></td>
+        </tr>
+
+        <tr>
+          <td>フリガナ</td>
+          <td><%= f.text_field :last_name_kana %>　<%= f.text_field :first_name_kana %></td>
+        </tr>
+
+        <tr>
+          <td>郵便番号</td>
+          <td><%= f.text_field :postal_code %></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>住所</td>
+          <td><%= f.text_field :address %></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>電話番号</td>
+          <td><%= f.number_field :telephone_number %></td>
+          <td></td>
+        </tr>
+
+        <tr>
+          <td>メールアドレス</td>
+          <td><%= f.email_field :email %></td>
+          <td></td>
+        </tr>
+        
+        <tr>
+          <td>会員ステータス</td>
+          <td>
+            <%= f.radio_button :is_active, :true %>
+            <%= f.label :is_active, "有効", { value: :true }  %>
+            
+            <%= f.radio_button :is_active, :false %>
+            <%= f.label :is_active, "退会", { value: :false } %>
+          </td>
+        </tr>
+        
+        <tr>
+          <td></td>
+          <td><%= f.submit "変更を保存", class:"btn btn-success" %></td>
+        </tr>
         <% end %>
-        <h3>氏名           <%= f.text_field :last_name %>  <%= f.text_field :first_name %></h3>
-        <h3>フリガナ        <%= f.text_field :last_name %>  <%= f.text_field :first_name %></h3>
-        <h3>郵便番号        <%= f.text_field :postal_code %></h3>
-        <h3>住所            <%= f.text_field :user_address %></h3>
-        <h3>電話番号        <%= f.number_field :telephone_number %></h3>
-        <h3>メールアドレス   <%= f.text_field :email %></h3>
-        <h3>会員ステータス
-          <% if @admins_customer.deleted_at.nil? %>
-            <%= link_to "退会", admins_customer_path, method: :delete, data:  { confirm: '本当に退会させますか？' }, class: "btn btn-danger" %>
-          <% else %>
-            <%= link_to "有効", user_restore_admins_customer_path(@admins_customer), method: :patch, class: "btn btn-primary" %>
-          <% end %>
-          <%= f.submit '変更を保存', class: "btn btn-primary" %>
-        </h3>
-      <% end %>
+      </table>
+    </div>
+  </div>
 </div>

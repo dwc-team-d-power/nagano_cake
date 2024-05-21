@@ -1,33 +1,57 @@
 class Public::OrdersController < ApplicationController
-  before_action :authenticate_customer!
-  
   def new
-    @cart_items = current_customer.id
-    @orderes = @cart_items
-    @orderes = Order.new
+    @order = Order.new
+    @addresses = current_customer.addresses
+    @addresses = current_customer.address
+    @addresses = current_customer.postal_code
+    @addresses = current_customer.name
   end
 
   def confirm
-    @orderes = Order.new(orders_params)
-    if @orderes.customer_id = current_customer.id
-       @orderes.save
-       flash[:notice] ="注文に成功しました"
-        redirect_to thanks_path
-    end     
+    @order = Order.new(order_params)
+    @order.customer_id = current_customer.id
+    @order.shipping_cost = 800
+     if params[:order][:address_option] == 'current'
+      @order.postal_code = current_customer.postal_code
+      @order.address = current_customer.address
+      @order.name = current_customer.name
+     elsif params[:order][:address_option]=='select'
+      selected_address = Address.find(params[:order][:address_id])
+      @order.postal_code = selected_address.postal_code
+      @order.address = selected_address.address
+      @order.name = selected_address.name
+     else
+      @order.postal_code = params[:order][:postal_code]
+      @order.address = params[:order][:address]
+      @order.name = params[:order][:name]
+     end
+     @order.total_payment = calculate_total_payment(@order)
+    if @order.save
+      redirect_to thanks_orders_path
+    else
+      render :new
+    end
   end
 
-  def thanks
-  end
-
-  def create
-  end
-
-  def index
-    @orders = current_customer.id
-    @orders = Order.all 
-  end
+  # # def create
+  # #   @order = Order.new(order_params)
+  # #   @order = Order.find(params[:order_id])
+  # end
 
   def show
-    @order = Orders.find([params:id])
+    @order = Order.find(params[:id])
   end
+
+  private
+
+  def order_params
+    params.require(:order).permit(:payment_method, :address_option,:postal_code, :address, :name)
+  end
+  
+  def calculate_total_payment(order)
+    cart_items = current_customer.cart_items
+    items_total = cart_items.sum{|item|item.amount*item.item.with_tax_price}
+    total_payment = items_total + order.shipping_cost
+    total_payment
+  end   
 end

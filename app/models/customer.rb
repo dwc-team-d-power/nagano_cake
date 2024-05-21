@@ -4,6 +4,7 @@ class Customer < ApplicationRecord
   has_many :cart_items
   has_many :orders
   has_many :addresses
+  has_many :items,through: :cart_items
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   def active_for_authentication?
@@ -14,7 +15,7 @@ class Customer < ApplicationRecord
     first_name + last_name 
   end 
   
-  def customer_info
-    "#{postal_code}#{address}#{name}"
+  def full_address
+    "〒#{postal_code}#{address}#{name}"
   end 
 end

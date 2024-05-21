@@ -11,7 +11,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @admins_orders.each do |p| %>
+          <% @orders.each do |p| %>
            <tr>
             <td><%= link_to customer.purchase_date.strftime("%Y-%m-%d %H:%M"), admins_order_path(customer.id), data: {"turbolinks" => false}  %></td>
             <td><%= customer.last_name %><%= customer.first_name %></td>
@@ -22,5 +22,5 @@
         </tbody>
       </table>
     </div>
-  <%= paginate @admins_orders, class: "paginate" %>
+  <%= paginate @orders, class: "paginate" %>
 </div>

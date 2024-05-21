@@ -12,10 +12,10 @@
         <tbody>
           <% @admins_orders.each do |p| %>
            <tr>
-            <td><%= link_to p.purchase_date.strftime("%Y-%m-%d %H:%M"), admins_order_path(p.id), data: {"turbolinks" => false}  %></td>
-            <td><%= .last_name %><%= p.user.first_name %></td>
-            <td><%= p.user.email  %></td>
-            <td><%= p.order_status_i18n  %></td>
+            <td><%= link_to customer.purchase_date.strftime("%Y-%m-%d %H:%M"), admins_order_path(p.id), data: {"turbolinks" => false}  %></td>
+            <td><%= customer.last_name %><%= customer.first_name %></td>
+            <td><%= customer.email  %></td>
+            <td><%= customer.order_status_i18n  %></td>
            </tr>
           <% end %>
         </tbody>

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
@@ -20,7 +22,7 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root 'homes#top'
-    get 'about', to: 'homes#about', as: 'about'
+    get '/about', to: 'homes#about', as: 'about'
 
     resources :items, only: [:index, :show]
 
@@ -34,14 +36,14 @@ Rails.application.routes.draw do
 
     resources :cart_items, only: [:index, :update, :destroy, :create] do
       collection do
-        delete 'destroy_all'
+        delete 'destroy_all', to: 'cart_items#destroy_all', as: 'destroy_all'
       end
     end
 
     resources :orders, only: [:new, :create, :index, :show] do
       collection do
-        post 'confirm'
-        get 'thanks'
+        post 'confirm', to: 'orders#confirm', as: 'confirm'
+        get 'thanks', to: 'orders#thanks', as: 'thanks'
       end
     end
 

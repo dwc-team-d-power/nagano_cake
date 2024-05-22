@@ -31,8 +31,8 @@
                   <u><%= item.name %></u>
                 <% end %>
               </td>
-              <td class="align-middle"><%= item.price %></td>
-              <td class="align-middle"><%= item.with_tax_price %></td>
+              <td class="align-middle"><%= number_to_currency(item.price, unit: "¥") %></td>
+              <td class="align-middle"><%= number_to_currency(item.with_tax_price, unit: "¥") %></td>
               <td class="align-middle"><%= item.genre.name %></td>
               <td class="align-middle">
                 <% if item.is_active %>
@@ -45,7 +45,6 @@
           <% end %>
         </tbody>
       </table>
-      <%= paginate @items %>
     </div>
   </div>
 </div>

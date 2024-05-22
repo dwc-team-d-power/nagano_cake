@@ -3,7 +3,8 @@ class Admin::ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update]
 
   def index
-    @items = Item.page(params[:page]).per(10)
+    @items = Item.all 
+    # @items = Item.page(params[:page]).per(10)
   end
 
   def new
@@ -16,7 +17,7 @@ class Admin::ItemsController < ApplicationController
       flash[:success] = "商品の新規登録が完了しました。"
       redirect_to admin_item_path(@item)
     else
-      flash.now[:danger] = "商品の新規登録内容に不備があります。"
+      flash[:error] = @item.errors.full_messages.join(", ")
       render :new
     end
   end

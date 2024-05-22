@@ -70,5 +70,6 @@ class Public::RegistrationsController < Devise::RegistrationsController
       :first_name, :last_name, :first_name_kana, :last_name_kana, 
       :postal_code, :address, :telephone_number, :email, :password, :password_confirmation
     ])
-  end
-end
+　　end
+   end 
+end 

@@ -3,56 +3,56 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.2'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
+# 最新のRailsを使用する代わりに: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.7', '>= 6.1.7.7'
-# Use sqlite3 as the database for Active Record
+# Active Record用のsqlite3を使用
 gem 'sqlite3', '~> 1.4'
-# Use Puma as the app server
+# アプリケーションサーバーとしてPumaを使用
 gem 'puma', '~> 5.0'
-# Use SCSS for stylesheets
+# スタイルシートにSCSSを使用
 gem 'sass-rails', '>= 6'
-# Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
+# アプリのようなJavaScriptをトランスパイルします。詳細: https://github.com/rails/webpacker
 gem 'webpacker', '~> 5.0'
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
+# Turbolinksはウェブアプリケーションのナビゲーションを高速化します。詳細: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+# JSON APIを簡単に構築できます。詳細: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
-# Use Redis adapter to run Action Cable in production
+# 本番環境でAction Cableを実行するためにRedisアダプターを使用
 # gem 'redis', '~> 4.0'
-# Use Active Model has_secure_password
+# Active Modelのhas_secure_passwordを使用
 # gem 'bcrypt', '~> 3.1.7'
 
-# Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+# Active Storageのバリアントを使用
+gem 'image_processing', '~> 1.2'
 
-# Reduces boot times through caching; required in config/boot.rb
+# キャッシュを通じてブート時間を短縮します。config/boot.rbで必要です。
 gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  # コード内の任意の場所で 'byebug' を呼び出すと、実行が停止し、デバッガーコンソールが表示されます。
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
 group :development do
-  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
+  # 例外ページやコード内の任意の場所で 'console' を呼び出すと、インタラクティブコンソールにアクセスできます。
   gem 'web-console', '>= 4.1.0'
-  # Display performance information such as SQL time and flame graphs for each request in your browser.
-  # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
+  # 各リクエストのSQL時間やフレームグラフなどのパフォーマンス情報をブラウザで表示します。
+  # 本番環境でも動作するように構成できます。詳細: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  # Springはアプリケーションをバックグラウンドで実行し、開発を高速化します。詳細: https://github.com/rails/spring
   gem 'spring'
 end
 
 group :test do
-  # Adds support for Capybara system testing and selenium driver
+  # Capybaraのシステムテストとseleniumドライバーのサポートを追加
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver', '>= 4.0.0.rc1'
-  # Easy installation and use of web drivers to run system tests with browsers
+  # ブラウザでシステムテストを実行するためのウェブドライバーの簡単なインストールと使用
   gem 'webdrivers'
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+# Windowsにはzoneinfoファイルが含まれていないため、tzinfo-data gemをバンドルします。
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'

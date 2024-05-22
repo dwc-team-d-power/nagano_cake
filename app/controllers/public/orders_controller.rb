@@ -20,6 +20,21 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
+    @order = current_customer.orders.new(order_params)
+    @order.save
+    @cart_items = current_customer.cart_items.all
+    
+    @cart_items.each do |cart_item|
+      @order_details = OrderDetail.new
+      @order_details.order_id = order.id
+      @order_details.item_id = cart_item.item.id
+      @order_details.price = cart_item.item.with_tax_price
+      @order_details.amount = cart_item.amount
+      @order_details.save
+    end
+    
+    current_customer.cart_items.destroy_all
+    redirect_to orders_thanks_path
   end
 
   def index
@@ -29,5 +44,15 @@ class Public::OrdersController < ApplicationController
 
   def show
     @order = Orders.find([params:id])
+  end
+  
+  private
+
+  def order_params
+    params.require(:order).permit(:name, :address, :postal_code, :payment_method)
+  end
+  
+  def address_params
+    params.require(:address).permit(:name, :address, :postal_code)
   end
 end

@@ -6,7 +6,7 @@
         <%= f.label :name, "名前", class: "form-label" %>
       </div>
       <div class="col-md-5">
-        <%= f.text_field :first_name, class: "form-control", id: "first_name" %>
+        <%= f.text_field :first_name, class: "form-control", id: "first_name", autofocus: true %>
       </div>
       <div class="col-md-5">
         <%= f.text_field :last_name, class: "form-control", id: "last_name" %>
@@ -30,7 +30,7 @@
         <%= f.label :email, "メールアドレス", class: "form-label" %>
       </div>
       <div class="col-md-10">
-        <%= f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email" %>
+        <%= f.email_field :email, class: "form-control", autocomplete: "email" %>
       </div>
     </div>
 

@@ -4,17 +4,19 @@
       <span class="px-3" style="background-color: #dcdcdc;">ジャンル一覧・追加</span>
     </h5>
   </div>
+  
   <div class="row">
-    <div class="col-4 my-4 form-group">
+    <div class="col-6 my-4 form-group">
       <%= form_with model: @genre, url:admin_genres_path do |f| %>
         <div class="form-inline">
           <p class="mx-3 my-1">ジャンル名</p>
-          <%= f.text_field :name, class: "form-control mx-2", placeholder: "ジャンル名", size: 20 %>
-          <%= f.submit '新規登録', class:'btn btn-success mx-2' %>
+          <%= f.text_field :name, class: "form-control mx-4", placeholder: "ジャンル名", size: 40 %>
+          <%= f.submit '新規登録', class:'btn btn-success ml-auto' %>
         </div>
       <% end %>
     </div>
   </div>
+
   <div class="row mt-5">
     <div class="col-4">
       <table class="table">

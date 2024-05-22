@@ -31,6 +31,7 @@ class Public::OrdersController < ApplicationController
     @cart_items = current_customer.cart_items.all
     @total = @cart_items.inject(0) { |sum, item| sum + item.subtotal }
     # inject(0)初期値は0、{|初期値, 要素| ブロック処理 }itemはcart_itemに変更?
+    # <% @total +=  cart_item.subtotal %>
     @total_payment = @order.shipping_cost + @total
     
   end
@@ -52,7 +53,7 @@ class Public::OrdersController < ApplicationController
       @order_details.save
     end
     
-    CartItem.destroy_all
+    current_customer.cart_items.destroy_all
     redirect_to orders_thanks_path
   end
 
@@ -69,6 +70,6 @@ class Public::OrdersController < ApplicationController
   end
   
   def address_params
-    params.require(:order).permit(:name, :address, :postal_code)
+    params.require(:address).permit(:name, :address, :postal_code)
   end
 end

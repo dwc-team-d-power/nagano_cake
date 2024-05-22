@@ -14,3 +14,5 @@ class Order < ApplicationRecord
       items.with_tax_price*amount
     end 
 end 
+end
+   

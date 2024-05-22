@@ -1,5 +1,5 @@
 class Public::AddressesController < ApplicationController
-  # before_action :authenticate_customer! 開発時オフにしてます
+  before_action :authenticate_customer!
   # before_action :is_matching_login_user, only: [:edit, :update, :destroy]
   def index
     @address = Address.new

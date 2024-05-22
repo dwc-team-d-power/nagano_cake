@@ -17,7 +17,7 @@
         <td><%= order.full_address %></td>
         <td>
           <% order.order_details.each do |order_detail| %>
-            <%= order_detail.item.name %> x <%= order_detail.amount %><br>
+            <%= order_detail.item.name %><br>
           <% end %>
         </td>
         <td><%= number_to_currency(order.total_payment, unit: "￥", precision: 0) %></td>

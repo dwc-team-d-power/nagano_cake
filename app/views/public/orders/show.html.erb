@@ -1,30 +1,30 @@
-<h1>注文履歴詳細</h1>
-<h3>注文情報</h3>
-<tabel>
-    <tr>注文日</tr>
-    <tr>配送日</tr>
-    <tr>支払方法</tr>
-    <tr>ステータス</tr>
-    <td><%= @order.created_at%></td>
-    <td><%= @order.full_address%></td>
-    <td><%= @order.payment_method%></td>
-    <td><%= @order.status%></td>
-</tabel>
+<h1>注文詳細</h1>
+<p><strong>注文日:</strong> <%= @order.created_at.strftime("%Y年%m月%d日") %></p>
+<p><strong>配送先:</strong> <%= @order.full_address %></p>
+<p><strong>支払い方法:</strong> <%= @order.payment_method == 'credit_card' ? 'クレジットカード' : '銀行振込' %></p>
 
-<h3>注文内容</h3>
-<tr>商品</tr>
-<tr>単価（税込)</tr>
-<tr>個数</tr>
-<tr>小計</tr>
-<td><%= @order.order_detail.item.name%></td>
-<td><%= @order.order_detail.item.price%></td>
-<td><%= @order.order_detail.amount%></td>
-<td><%= @order.cart_items.subtotal%></td>
+<h3>商品情報</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>商品名</th>
+      <th>単価(税込)</th>
+      <th>数量</th>
+      <th>小計</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @order.order_details.each do |order_detail| %>
+      <tr>
+        <td><%= order_detail.item.name %></td>
+        <td><%= number_to_currency(order_detail.price, unit: "￥", precision: 0) %></td>
+        <td><%= order_detail.amount %></td>
+        <td><%= number_to_currency(order_detail.price * order_detail.amount, unit: "￥", precision: 0) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-<h3>請求情報</h3>
-<tr>商品合計</tr>
-<tr>配送料</tr>
-<tr>ご請求額</tr>
-<td><%= @order.total_payment%></td>
-<td><%= @order.shipping_cost%></td>
-<td><%= @order+shipping_cost%></td>
+<p><strong>商品合計:</strong> <%= number_to_currency(@order.order_details.sum { |detail| detail.price * detail.amount }, unit: "￥", precision: 0) %></p>
+<p><strong>送料:</strong> <%= number_to_currency(@order.shipping_cost, unit: "￥", precision: 0) %></p>
+<p><strong>合計金額:</strong> <%= number_to_currency(@order.total_payment, unit: "￥", precision: 0) %></p>

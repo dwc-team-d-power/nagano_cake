@@ -1,7 +1,23 @@
-<h1>商品一覧</h1> <p>(全<%=@items.count%>件)</p>
-<%= render 'genre',genres:@genre%>
-<% @items.each do |item|%>
- <%= item.image%>
- <%= item.name%>
- <%= item.with_tax_price%>
-<% end %>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-9">
+      <h1>商品一覧 <small>(全<%= @items.total_count %>件)</small></h1>
+      
+      <div class="row">
+        <% @items.each do |item| %>
+          <div class="col-md-4 mb-4 text-center">
+            <%= image_tag(item.image.attached? ? url_for(item.image) : 'placeholder.jpg', size: "200x150", class: "img-fluid") %>
+            <h5 class="mt-2"><%= item.name %></h5>
+            <p>¥<%= number_to_currency(item.with_tax_price, unit: "¥", format: "%n") %></p>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <%= paginate @items %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

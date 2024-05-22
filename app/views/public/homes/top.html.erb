@@ -1,15 +1,40 @@
-<div class="container">
-<h1>ようこそながのCAKEへ！
-    このサイトは、ケーキ販売のECサイトになります。
-    会員でない方も商品の閲覧はできますが、購入には会員登録が必要になります。</h1>
-<div class="row">
-    <%= render 'public/items/genre', genres: @genres %>
-</div>    
- <h3>新着商品</h3>
-    <%= @items.each do |item| %>
-    <%= link_to item.name,items_path%>
-    <%= item.image%>
-    <%= item.price%>
-    <% end %> 
-    <%= link_to "全ての商品",items_path%>
-</div>   
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-3">
+      <h4>ジャンル検索</h4>
+      <ul class="list-group">
+        <% @genres.each do |genre| %>
+          <li class="list-group-item">
+            <%= link_to genre.name, items_path(genre_id: genre.id) %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="col-md-9">
+      <h1>ようこそ、ながのCAKEへ！</h1>
+      <p>このサイトは、ケーキ販売のECサイトになります。会員でない方も商品の閲覧はできますが、購入には会員登録が必要になります。</p>
+      
+      <h3>新着商品</h3>
+      <div class="row">
+        <% @items.each do |item| %>
+          <div class="col-md-3 mb-4">
+            <%= link_to item_path(item) do %>
+              <div class="card">
+                <%= image_tag(item.image.attached? ? url_for(item.image) : 'placeholder.jpg', size: "100x100", class: "card-img-top mx-auto d-block mt-3", alt: item.name) %>
+                <div class="card-body text-center">
+                  <h5 class="card-title"><%= item.name %></h5>
+                  <p class="card-text">¥<%= number_to_currency(item.price, unit: "¥", format: "%n") %></p>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="text-center mt-4">
+        <%= link_to "全ての商品を見る", items_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>

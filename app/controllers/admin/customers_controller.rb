@@ -43,4 +43,26 @@ class Admin::CustomersController < ApplicationController
   def customer_params
     params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :email, :address, :postcode, :phone_number, :is_deleted)
   end
+
+  private
+
+  def set_customer
+    @customer = Customer.find(params[:id])
+  end
+
+  def customer_params
+    params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :postal_code, :address, :telephone_number, :email, :is_active)
+  end
+  
+  def customer_restore
+    @admin_customer = Customer.deleted.find(params[:id]).restore
+    redirect_to admin_customers_path
+  end
+
+  def destroy
+    @admins_customer = Customer.find(params[:id])
+    @admins_customer.destroy
+    redirect_to admin_customers_path
+  end
+  
 end

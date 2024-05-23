@@ -1,0 +1,18 @@
+<div class="container mt-3">
+  <div class="row">
+    <h5 class="col-4 text-center my-4">
+      <span class="px-3" style="background-color: #dcdcdc;">検索結果</span>
+    </h5>
+  </div>
+  
+  <table class="table">
+    <thead>
+    </thead>
+    <tbody>
+      <% @items.each do |item| %>
+      <tr>
+        <td><%= item.name %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>

@@ -2,18 +2,26 @@
   <nav class="">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-4">
-          <a class="navbar-brand ml-3 mt-3 h4" href="/">長野ケーキ</a>
+        <div class="col-3 pl-4">
+          <a class="navbar-brand" href="/"><%= image_tag('nagano_cake.jpg', size: "75x75") %></a>
+          <a class="navbar-brand" href="/">Nagano Cake</a>
         </div>
-        <div class="col-4">
+        <div class="col-3">
           <% if customer_signed_in? %>
             <p class="mt-4">ようこそ、<%= current_customer.last_name %>さん！</p>
+<<<<<<< HEAD
           <% else %>
             <!-- ログインしていない場合の処理 -->
           <% end %>
         </div>
         <div class="col-4">
           <div class="row">
+=======
+          <% end %>
+        </div>
+        <div class="col-6">
+          <div class="row justify-content-end mr-1">
+>>>>>>> customer_sakamoto
             <ul class="nav">
               <% if admin_signed_in? %>
                 <%= render 'layouts/admin_header' %>
@@ -24,14 +32,19 @@
               <% end %>
             </ul>
           </div>
-          <div class="row">
-            <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+          <div class="row justify-content-end mr-1 mt-1">
+            <%= form_with url: search_path, method: :get do |f| %>
+              <%= f.text_field :word, placeholder: "Search" %>
+              <%= f.submit "Search", class: "btn btn-outline-success btn-sm" %>
+            <% end %>
           </div>
         </div>
       </div>
     </div>
   </nav>
 </header>
+
+<!--<form class="d-flex" role="search">-->
+<!--  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
+<!--  <button class="btn btn-outline-success" type="submit">Search</button>-->
+<!--</form>-->

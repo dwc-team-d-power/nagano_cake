@@ -1,20 +1,19 @@
-<h1 class="text-center mt-4">マイページ</h1>
-
+<!-- app/views/public/customers/my_page.html.erb -->
 <div class="container mt-4">
+  <h1 class="text-center">マイページ</h1>
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h3>登録情報</h3>
-    <%= link_to "編集する", edit_customer_information_path, class: "btn btn-primary" %>
+    <%= link_to "編集する", edit_customer_registration_path, class: "btn btn-primary" %>
   </div>
-
   <table class="table table-bordered">
     <tbody>
       <tr>
         <th>氏名</th>
-        <td><%= @customer.first_name + @customer.last_name %></td>
+        <td><%= @customer.last_name %> <%= @customer.first_name %></td>
       </tr>
       <tr>
         <th>カナ</th>
-        <td><%= @customer.first_name_kana + @customer.last_name_kana %></td>
+        <td><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></td>
       </tr>
       <tr>
         <th>郵便番号</th>
@@ -34,14 +33,4 @@
       </tr>
     </tbody>
   </table>
-
-  <div class="d-flex justify-content-between align-items-center mt-5 mb-3">
-    <h3>配送先</h3>
-    <%= link_to "一覧を見る", addresses_path, class: "btn btn-info" %>
-  </div>
-
-  <div class="d-flex justify-content-between align-items-center mt-5 mb-3">
-    <h3>注文履歴</h3>
-    <%= link_to "一覧を見る",orders_path , class: "btn btn-info" %>
-  </div>
 </div>

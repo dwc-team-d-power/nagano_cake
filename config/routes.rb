@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
@@ -16,7 +14,7 @@ Rails.application.routes.draw do
     resources :genres, only: [:index, :create, :edit, :update]
     resources :customers, only: [:index, :show, :edit, :update]
     resources :orders, only: [:show, :update] do
-    resources :order_details, only: [:update]
+      resources :order_details, only: [:update]
     end
   end
 
@@ -27,7 +25,7 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :show]
 
     resource :customer, only: [] do
-      get 'my_page', to: 'customers#show', as: 'my_page'
+      get 'my_page', to: 'customers#my_page', as: 'my_page'
       get 'information/edit', to: 'customers#edit', as: 'edit_information'
       patch 'information', to: 'customers#update', as: 'information'
       get 'unsubscribe', to: 'customers#unsubscribe', as: 'unsubscribe'

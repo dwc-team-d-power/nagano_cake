@@ -23,7 +23,7 @@ class Public::SessionsController < Devise::SessionsController
   protected
   
   def after_sign_in_path_for(resource)
-    customer_my_page_path
+    my_page_customer_path
   end
   
   def after_sign_out_path_for(resource)
@@ -33,23 +33,22 @@ class Public::SessionsController < Devise::SessionsController
   private
   # アクティブであるかを判断するメソッド
   def customer_state
-  # 【処理内容1】 入力されたemailからアカウントを1件取得
-  customer = Customer.find_by(email: params[:customer][:email])
-  # 【処理内容2】 アカウントを取得できなかった場合、このメソッドを終了する
-  return if customer.nil?
-  # 【処理内容3】 取得したアカウントのパスワードと入力されたパスワードが一致していない場合、このメソッドを終了する
-  return unless customer.valid_password?(params[:customer][:password])
-  # 【処理内容4】 アクティブでない会員に対する処理
-  return unless customer.is_active == false
-  redirect_to new_customer_registration_path
+    # 【処理内容1】 入力されたemailからアカウントを1件取得
+    customer = Customer.find_by(email: params[:customer][:email])
+    # 【処理内容2】 アカウントを取得できなかった場合、このメソッドを終了する
+    return if customer.nil?
+    # 【処理内容3】 取得したアカウントのパスワードと入力されたパスワードが一致していない場合、このメソッドを終了する
+    return unless customer.valid_password?(params[:customer][:password])
+    # 【処理内容4】 アクティブでない会員に対する処理
+    if customer.is_active == false
+      redirect_to new_customer_registration_path
+    end
   end
-  
-  protected 
-  
-    def configure_permitted_parameters
+
+  def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [
       :first_name, :last_name, :first_name_kana, :last_name_kana, 
       :postal_code, :address, :telephone_number, :email, :password, :password_confirmation
     ])
-    end
-end   
+  end
+end

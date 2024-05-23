@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :show]
 
     resource :customer, only: [] do
-      get 'my_page', to: 'customers#show', as: 'my_page'
+      get 'my_page', to: 'customers#my_page', as: 'my_page'
       get 'information/edit', to: 'customers#edit', as: 'edit_information'
       patch 'information', to: 'customers#update', as: 'information'
       get 'unsubscribe', to: 'customers#unsubscribe', as: 'unsubscribe'

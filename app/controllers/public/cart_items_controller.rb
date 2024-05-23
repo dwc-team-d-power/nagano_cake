@@ -11,18 +11,20 @@ class Public::CartItemsController < ApplicationController
     # 2. カート内の個数をフォームから送られた個数分追加する
     existing_cart_item.amount += params[:cart_item][:amount].to_i
     if existing_cart_item.save
-      redirect_to cart_items_path, notice: 'カートに商品が追加されました。'
+      flash[:notice]="カートに商品が追加されました"
+      redirect_to cart_items_path
     else
-      redirect_to item_path(params[:cart_item][:item_id]), alert: 'カートに商品を追加できませんでした。'
+      redirect_to item_path(params[:cart_item][:item_id])
     end
   else
     # 存在しなかった場合
     # カートモデルにレコードを新規作成する
     @cart_item = current_customer.cart_items.new(cart_item_params)
     if @cart_item.save
-      redirect_to cart_items_path, notice: 'カートに商品を追加しました。'
+      flash[:notice]="カートに商品を追加しました"
+      redirect_to cart_items_path
     else
-      redirect_to item_path(params[:cart_item][:item_id]), alert: 'カートに商品を追加できませんでした。'
+      redirect_to item_path(params[:cart_item][:item_id])
     end
   end
  end
@@ -30,21 +32,24 @@ class Public::CartItemsController < ApplicationController
   def update
     @cart_item = current_customer.cart_items.find(params[:id])
     if @cart_item.update(cart_item_params)
-      redirect_to cart_items_path,notice:'カートアイテムを更新しました'
+      flash[:notice]="カートアイテムを更新しました"
+      redirect_to cart_items_path
     else
-      render :index,alert:'カートアイテムの更新に失敗しました'
+      render :index
     end   
   end
 
   def destroy
     @cart_item = current_customer.cart_items.find(params[:id])
     @cart_item.destroy
-    redirect_to cart_items_path, notice: 'カートアイテムを削除しました。'
+    flash[:notice]="カートアイテムを削除しました"
+    redirect_to cart_items_path
   end
 
   def destroy_all
     current_customer.cart_items.destroy_all
-    redirect_to cart_items_path, notice: 'カート内の商品を全て削除しました'
+    flash[:notice]="カート内の商品を全て削除しました"
+    redirect_to cart_items_path
   end
 
    

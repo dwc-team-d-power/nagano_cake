@@ -24,7 +24,6 @@ Rails.application.routes.draw do
     get '/about' => 'homes#about', as: 'about'
 
     resources :items, only: [:index, :show]
-
     get 'customers/my_page' => 'customers#my_page', as: 'customer_my_page'
     get 'customers/information/edit' => 'customers#information_edit', as: 'edit_customer_information'
     patch 'customers/information/edit' => 'customers#update', as: 'update_customer_information'

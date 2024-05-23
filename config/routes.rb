@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     get '/about', to: 'homes#about', as: 'about'
 
     resources :items, only: [:index, :show]
+<<<<<<< HEAD
 
     resource :customer, only: [] do
       get 'my_page', to: 'customers#show', as: 'my_page'
@@ -33,6 +34,13 @@ Rails.application.routes.draw do
       get 'unsubscribe', to: 'customers#unsubscribe', as: 'unsubscribe'
       patch 'withdraw', to: 'customers#withdraw', as: 'withdraw'
     end
+=======
+    get 'customers/my_page' => 'customers#my_page', as: 'customer_my_page'
+    get 'customers/information/edit' => 'customers#information_edit', as: 'edit_customer_information'
+    patch 'customers/information/edit' => 'customers#update', as: 'update_customer_information'
+    get 'customers/unsubscribe' => 'customers#unsubscribe', as: 'customer_unsubscribe'
+    patch 'customers/withdraw' => 'customers#withdraw', as: 'customer_withdraw'
+>>>>>>> takeshiumemoto
 
     resources :cart_items, only: [:index, :update, :destroy, :create] do
       collection do
@@ -49,6 +57,10 @@ Rails.application.routes.draw do
 
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
   end
+<<<<<<< HEAD
   
   get 'search' => "searches#search"
 end
+=======
+end
+>>>>>>> takeshiumemoto

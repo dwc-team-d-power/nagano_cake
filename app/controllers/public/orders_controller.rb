@@ -7,6 +7,9 @@ class Public::OrdersController < ApplicationController
   def confirm
     @order = Order.new(order_params)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> takeshiumemoto
     @order.customer_id = current_customer.id
     @order.shipping_cost = 800
     @order.total_payment = calculate_total_payment
@@ -24,6 +27,7 @@ class Public::OrdersController < ApplicationController
       # すでにフォームから送信されたデータが@orderにセットされているので何もしない
     end
     render :confirm
+<<<<<<< HEAD
 =======
     @order.shipping_cost = 800
     
@@ -53,6 +57,8 @@ class Public::OrdersController < ApplicationController
     @total_payment = @order.shipping_cost + @total
     
 >>>>>>> customer_sakamoto
+=======
+>>>>>>> takeshiumemoto
   end
     def create
     @order = Order.new(order_params)
@@ -85,6 +91,9 @@ class Public::OrdersController < ApplicationController
   private
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> takeshiumemoto
   def order_params
     params.require(:order).permit(:payment_method, :address_option,:postal_code, :address, :name)
   end
@@ -92,6 +101,7 @@ class Public::OrdersController < ApplicationController
  def calculate_total_payment
     current_customer.cart_items.sum(&:subtotal) + 800 # 固定の送料を追加
  end
+<<<<<<< HEAD
 =======
   def create
     @order = current_customer.orders.new(order_params)
@@ -127,4 +137,6 @@ class Public::OrdersController < ApplicationController
     params.require(:address).permit(:name, :address, :postal_code)
   end
 >>>>>>> customer_sakamoto
+=======
+>>>>>>> takeshiumemoto
 end

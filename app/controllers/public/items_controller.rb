@@ -3,8 +3,13 @@ class Public::ItemsController < ApplicationController
     @items = Item.page(params[:page]).per(10)
     if params[:genre_id]
       @genre = Genre.find(params[:genre_id])
-      @items = @genre.items
+      @items = @genre.items.page(params[:page]).per(10)
     else
+<<<<<<< HEAD
+=======
+      @items = Item.all.page(params[:page]).per(10)
+    end
+>>>>>>> takeshiumemoto
     @genres = Genre.all
     @genre = Genre.find_by(id: params[:genre_id]) if params[:genre_id].present?
     end

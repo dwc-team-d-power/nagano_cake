@@ -1,4 +1,5 @@
 class Item < ApplicationRecord
+<<<<<<< HEAD
     belongs_to :genre
     has_many :cart_items
     has_many :order_details
@@ -8,6 +9,18 @@ class Item < ApplicationRecord
     validates :genre_id, presence: true
     validates :price, presence: true, numericality: { only_integer: true, greater_than: 0 }
       
+=======
+  has_many :cart_items, dependent: :destroy
+  has_many :order_details, dependent: :destroy
+  belongs_to :genre
+
+  has_one_attached :image
+
+  validates :name, presence: true
+  validates :introduction, presence: true
+  validates :genre_id, presence: true
+  validates :price, presence: true, numericality: { only_integer: true, greater_than: 0 }
+>>>>>>> takeshiumemoto
     has_one_attached :image
     
     def with_tax_price

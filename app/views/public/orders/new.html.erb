@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> takeshiumemoto
 <h1>注文情報入力</h1>
 <%= form_with model: @order, url: confirm_orders_path, method: :post, local: true do |f| %>
   <div class="form-group">
@@ -6,6 +9,7 @@
     <div class="form-check">
       <%= f.radio_button :payment_method, :credit_card, class: "form-check-input" %>
       <%= f.label :payment_method_credit_card, "クレジットカード", class: "form-check-label" %>
+<<<<<<< HEAD
 =======
 <div class="container-fluid">
   <div class="row">
@@ -62,6 +66,8 @@
       </div>
       <% end %>
 >>>>>>> customer_sakamoto
+=======
+>>>>>>> takeshiumemoto
     </div>
     <div class="form-check">
       <%= f.radio_button :payment_method, :transfer, class: "form-check-input" %>

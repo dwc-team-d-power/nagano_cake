@@ -263,7 +263,11 @@ DEPENDENCIES
   enum_help
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
+<<<<<<< HEAD
   kaminari (~> 1.2.1)
+=======
+  kaminari
+>>>>>>> takeshiumemoto
   listen (~> 3.3)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)

@@ -18,6 +18,7 @@
       <h3 class="text-center">新着商品</h3>
       <div class="row">
         <% @items.each do |item| %>
+<<<<<<< HEAD
           <div class="col-md-3 mb-4">
             <%= link_to item_path(item) do %>
               <div class="card">
@@ -26,6 +27,18 @@
                   <h5 class="card-title"><%= item.name %></h5>
                   <p class="card-text">¥<%= number_to_currency(item.price, unit: "¥", format: "%n") %></p>
                 </div>
+=======
+          <div class="col-md-4 my-3">
+            <div class="card h-100 shadow-sm">
+              <% if item.image.attached? %>
+                <%= image_tag item.image, class: "card-img-top", size: "100x100" %>
+              <% else %>
+                <%= image_tag "no_image.jpeg", class: "card-img-top", size: "100x100" %>
+              <% end %>
+              <div class="card-body">
+                <h5 class="card-title"><%= link_to item.name, item_path(item), class: "stretched-link text-decoration-none" %></h5>
+                <p class="card-text"><%= number_to_currency(item.with_tax_price, unit: "¥", precision: 0) %></p>
+>>>>>>> takeshiumemoto
               </div>
             <% end %>
           </div>

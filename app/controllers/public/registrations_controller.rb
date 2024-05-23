@@ -24,4 +24,4 @@ class Public::RegistrationsController < Devise::RegistrationsController
       :postal_code, :address, :telephone_number, :email, :password, :password_confirmation
     ])
   end
-end
+end 

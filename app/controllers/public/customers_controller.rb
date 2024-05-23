@@ -1,16 +1,17 @@
 class Public::CustomersController < ApplicationController
    #before_action :authenticate_customer!
   
-  def show
+  def my_page
     @customer = current_customer
   end
 
   def edit
-    @customer = current_customer
+    @customer = Customer.find(params[:id])
+    # @customer = current_customer
   end
 
   def update
-    @customer = current_customer
+    @customer = Customer.find(params[:id])
     if @customer.update(customer_params)
       redirect_to customer_my_page_path,notice:'会員情報が更新されました'
     else 

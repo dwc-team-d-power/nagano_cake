@@ -1,17 +1,16 @@
 Rails.application.routes.draw do
-
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  
-  devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
-  sessions: "admin/sessions"
-  }
-  devise_for :customers,skip: [:passwords], controllers: {
-  registrations: "public/registrations",
-  sessions: 'public/sessions'
+  devise_for :admin, skip: [:registrations, :passwords], controllers: {
+    sessions: "admin/sessions"
   }
   
-   namespace :admin do
+  devise_for :customers, skip: [:passwords], controllers: {
+    registrations: "public/registrations",
+    sessions: 'public/sessions'
+  }
+
+  namespace :admin do
     root 'homes#top'
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]
@@ -21,36 +20,35 @@ Rails.application.routes.draw do
     end
   end
 
- scope module: :public do
+  scope module: :public do
     root 'homes#top'
-    get '/about' => 'homes#about', as: 'about'
-  end
-  scope module: :public do
+    get '/about', to: 'homes#about', as: 'about'
+
     resources :items, only: [:index, :show]
-  end
-  scope module: :public do
-    get 'customers/my_page' => 'customers#show'
-    get 'customers/information/edit' => 'customers#edit'
-    get 'customers/information' => 'customers#update'
-    get 'customers/unsubscribe'
-    get 'customers/withdraw'
-    
-    get 'customers/my_page' => 'customers#my_page', as: 'customer_my_page'
-    get 'customers/information/edit' => 'customers#information_edit', as: 'edit_customer_information'
-    patch 'customers/information/edit' => 'customers#update', as: 'update_customer_information/'
-    get 'customers/unsubscribe' => 'customers#unsubscribe', as: 'customer_unsubscribe'
-    patch 'customers/withdraw' => 'customers#withdraw', as: 'customer_withdraw'
-  end
-  scope module: :public do
-    resources :cart_items, only: [:index, :update, :destroy, :create]
-    get 'cart_items/destroy_all'
-  end
-  scope module: :public do
-    resources :orders, only: [:new, :create, :index, :show]
-    get 'orders/confirm'
-    get 'orders/thanks'
-  end
-  scope module: :public do
+
+    resource :customer, only: [] do
+      get 'my_page', to: 'customers#show', as: 'my_page'
+      get 'information/edit', to: 'customers#edit', as: 'edit_information'
+      patch 'information', to: 'customers#update', as: 'information'
+      get 'unsubscribe', to: 'customers#unsubscribe', as: 'unsubscribe'
+      patch 'withdraw', to: 'customers#withdraw', as: 'withdraw'
+    end
+
+    resources :cart_items, only: [:index, :update, :destroy, :create] do
+      collection do
+        delete 'destroy_all', to: 'cart_items#destroy_all', as: 'destroy_all'
+      end
+    end
+
+    resources :orders, only: [:new, :create, :index, :show] do
+      collection do
+        post 'confirm', to: 'orders#confirm', as: 'confirm'
+        get 'thanks', to: 'orders#thanks', as: 'thanks'
+      end
+    end
+
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
   end
-end 
+  
+  get 'search' => "searches#search"
+end

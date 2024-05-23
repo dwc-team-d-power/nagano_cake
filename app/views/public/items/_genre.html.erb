@@ -1,10 +1,10 @@
+<h3>ジャンル検索</h3>
 <% if genres.present? %>
-  <% genres.each do |genre| %>
-    <div class="col-md-4">
-      <h2><%= genre.name %></h2>
-      <%= link_to genre.name, items_path(genre_id: genre.id) %>
-    </div>
-  <% end %>
+  <ul class="list-group">
+    <% genres.each do |genre| %>
+    <li class="list-group-item"><%= link_to genre.name, items_path(genre_id: genre.id) %></li>
+    <% end %>
+  </ul>
 <% else %>
   <p>ジャンルが見つかりませんでした。</p>
 <% end %>

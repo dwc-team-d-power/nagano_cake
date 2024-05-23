@@ -1,7 +1,27 @@
-<%= render 'genre',genres:@genre%>
-<%= items.image%>
-<%= items.name%>
-<%= items.price%>(税込)
-<%= form_with model: @amount do |f|%>
- <%= f.select :amount,*[1..5]%>
- <%= f.submit 'カートに入れる'%>
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <%= render 'public/items/genre', genres: @genres %>
+    </div>
+    <div class="col-md-4">
+    <% if @item.image.attached? %>
+      <%= image_tag @item.image, class: "img-thumbnail", size: "800x800" %>
+    <% else %>
+    <%= image_tag "no_image.jpeg", class: "img-thumbnail", size: "800x800" %>
+    <% end %>
+　　</div>
+    <div class="col-md-6">
+      <h2><%= @item.name %></h2>
+      <p><%= @item.introduction %></p>
+      <p><%= number_to_currency(@item.with_tax_price, unit: "￥", precision: 0) %>(税込)</p>
+      <%= form_with model: @cart_item, url: cart_items_path, local: true do |f| %>
+        <%= f.hidden_field :item_id, value: @item.id %>
+          <div class="form-group d-flex align-items-center">
+        　 <%= f.select :amount, (1..5).to_a, {},place_holder:"個数選択", class: "form-control mr-2" %>
+    　　　　　　　<%= f.submit "カートに入れる", class: "btn btn-primary" %>
+          </div>
+      <% end %>
+    </div>  
+    </div>
+  </div>
+</div>

@@ -7,24 +7,29 @@ class Customer < ApplicationRecord
   has_many :addresses, dependent: :destroy
   has_many :cart_items, dependent: :destroy
   has_many :orders, dependent: :destroy
+  has_many :items, through: :cart_items
   
   def full_name
-    last_name + '' + first_name
+    "#{last_name} #{first_name}"
   end
   
   def full_name_kana
-    last_name_kana + '' + first_name_kana
+    "#{last_name_kana} #{first_name_kana}"
   end
   
   def customer_status
-    if is_active == true
-      "有効"
-    else
-      "退会"
-    end
+    is_active ? "有効" : "退会"
+  end
+
+  def active_for_authentication?
+    super && is_active
   end
   
-  def active_for_authentication?
-    super && (is_active == false)
+  def name
+    "#{first_name} #{last_name}"
+  end 
+  
+  def full_address
+    "〒#{postal_code} #{address} #{name}"
   end
 end

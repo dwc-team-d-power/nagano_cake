@@ -17,7 +17,4 @@ class Order < ApplicationRecord
         I18n.t("enums.order.status.#{status}")
     end     
 end 
-<<<<<<< HEAD
-=======
    
->>>>>>> takeshiumemoto

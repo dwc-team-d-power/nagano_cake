@@ -5,15 +5,8 @@ class Public::CustomersController < ApplicationController
     @customer = current_customer
   end
 
-<<<<<<< HEAD
-  def edit
-    @customer = Customer.find(params[:id])
-    # @customer = current_customer
-=======
   def information_edit
     @customer = current_customer
-   
->>>>>>> takeshiumemoto
   end
 
   def update

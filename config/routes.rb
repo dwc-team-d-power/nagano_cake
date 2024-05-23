@@ -11,21 +11,13 @@ Rails.application.routes.draw do
   sessions: 'public/sessions'
   }
   
-  namespace :admin do
+   namespace :admin do
     root 'homes#top'
-  end
-  namespace :admin do
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
-  end
-  namespace :admin do
     resources :genres, only: [:index, :create, :edit, :update]
-  end
-  namespace :admin do
     resources :customers, only: [:index, :show, :edit, :update]
-  end
-  namespace :admin do
     resources :orders, only: [:show, :update] do
-      resources :order_details, only: [:update]
+    resources :order_details, only: [:update]
     end
   end
 

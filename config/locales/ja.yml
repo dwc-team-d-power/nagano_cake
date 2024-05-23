@@ -6,7 +6,7 @@ ja:
         transfer: "銀行振込"
   activerecord:
     errors:
-      messages: "エラーが発生したため、保存されませんでした。（ja.ymlに記述しています）"
+      messages: 
         record_invalid: 'バリデーションに失敗しました: %{errors}'
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"

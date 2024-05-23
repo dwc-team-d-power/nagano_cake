@@ -53,6 +53,8 @@ Rails.application.routes.draw do
   scope module: :public do
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
   end
+  
+  get 'search' => "searches#search"
 end
 
 #     resource :customer, only: [] do

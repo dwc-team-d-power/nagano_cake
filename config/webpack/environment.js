@@ -1,15 +1,8 @@
 const { environment } = require('@rails/webpacker')
 
-<<<<<<< HEAD
-module.exports = environment
-
-
-const webpack = require('webpack')
-=======
 module.exports = environment;
 
 const webpack = require('webpack');
->>>>>>> takeshiumemoto
 environment.plugins.prepend(
   'Provide',
   new webpack.ProvidePlugin({

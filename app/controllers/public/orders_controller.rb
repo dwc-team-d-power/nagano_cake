@@ -185,4 +185,3 @@ end
 #     params.require(:address).permit(:name, :address, :postal_code)
 #   end
 # >>>>>>> customer_sakamoto
->>>>>>> c916e8f79dabcf7e95f8158e4095e3bcce34c31b

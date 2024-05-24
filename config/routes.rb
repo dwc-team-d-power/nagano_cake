@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
-  
+
   devise_for :customers, skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
@@ -26,7 +26,7 @@ Rails.application.routes.draw do
 
     resources :items, only: [:index, :show]
 
-    resource :customer, only: [] do
+    resource :customers, only: [] do
       get 'my_page', to: 'customers#my_page', as: 'my_page'
       get 'information/edit', to: 'customers#edit', as: 'edit_information'
       patch 'information', to: 'customers#update', as: 'information'
@@ -49,6 +49,6 @@ Rails.application.routes.draw do
 
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
   end
-  
+
   get 'search' => "searches#search"
 end

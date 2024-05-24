@@ -3,6 +3,7 @@ class Public::OrdersController < ApplicationController
 
   def new
     @order = Order.new
+    @addresses = current_customer.addresses
   end
 
   def confirm
@@ -48,22 +49,20 @@ class Public::OrdersController < ApplicationController
       render :new
     end
   end
-
-  def index
-    @orders = current_customer.orders.includes(order_details: :item)
-  end
-
-  def show
+   def index
+      @orders = current_customer.orders.includes(order_details: :item)
+   end    
+   def show
     @order = Order.find(params[:id])
-  end
-
+   end
+    
   private
 
   def order_params
-    params.require(:order).permit(:payment_method, :shipping_address, :address_id, :postal_code, :address, :name)
+    params.require(:order).permit(:payment_method, :address_option,:postal_code, :address, :name)
   end
-
-  def calculate_total_payment
+  
+ def calculate_total_payment
     current_customer.cart_items.sum(&:subtotal) + 800 # 固定の送料を追加
-  end
+ end
 end

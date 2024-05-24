@@ -98,3 +98,5 @@ class Public::OrdersController < ApplicationController
     params.require(:address).permit(:name, :address, :postal_code)
   end
 end
+
+

@@ -14,7 +14,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
   protected
 
   def after_sign_up_path_for(resource)
-    customer_my_page_path(current_customer)
+    customers_my_page_path(current_customer)
   end
 
   # If you have extra params to permit, append them to the sanitizer.

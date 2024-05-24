@@ -2,6 +2,8 @@ class Order < ApplicationRecord
     has_many :order_details,dependent: :destroy
     belongs_to :customer
     attr_accessor :address_option
+     has_one_attached :image
+    
     enum payment_method: { credit_card: 0, transfer: 1 }
     enum status:{ payment_confirmation:0,production:1,preparation_for_shipping:2,sent:3}
     def full_address

@@ -10,6 +10,10 @@ class Public::CustomersController < ApplicationController
     # @customer = current_customer
   end
 
+def show
+   @customer = current_customer
+end
+
   def update
     @customer = Customer.find(params[:id])
     if @customer.update(customer_params)

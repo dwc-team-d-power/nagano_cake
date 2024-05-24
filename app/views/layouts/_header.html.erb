@@ -1,10 +1,10 @@
-<header class="sticky-top border-bottom">
+<header class="sticky-top border-bottom bg-white">
   <nav class="">
     <div class="container-fluid">
       <div class="row">
         <div class="col-3 pl-4">
-          <a class="navbar-brand" href="/"><%= image_tag('nagano_cake.jpg', size: "75x75") %></a>
           <a class="navbar-brand" href="/">Nagano Cake</a>
+          <a class="navbar-brand" href="/"><%= image_tag('nagano_cake.jpg', size: "75x75") %></a>
         </div>
         <div class="col-3">
           <% if customer_signed_in? %>
@@ -25,8 +25,12 @@
           </div>
           <div class="row justify-content-end mr-1 mt-1">
             <%= form_with url: search_path, method: :get do |f| %>
+            <div class="input-group">
               <%= f.text_field :word, placeholder: "Search" %>
-              <%= f.submit "Search", class: "btn btn-outline-success btn-sm" %>
+              <%= button_tag type: "submit", class: "btn btn-outline-primary btn-sm" do %>
+                <i class="fa-solid fa-magnifying-glass"></i>
+              <% end %>
+            </div>
             <% end %>
           </div>
         </div>

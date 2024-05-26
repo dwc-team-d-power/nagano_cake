@@ -10,9 +10,13 @@
         <div class="col-md-4 mb-3">
           <div class="card h-100">
             <% if item.image.attached? %>
-              <%= image_tag item.image, class: "card-img-top", size: "150x150" %>
+              <%= link_to item_path(item) do %>
+                <%= image_tag item.image, class: "card-img-top", size: "150x150" %>
+            <% end %>
             <% else %>
-              <%= image_tag "no_image.jpeg", class: "card-img-top", size: "150x150" %>
+              <%= link_to item_path(item) do %>
+                <%= image_tag "no_image.jpeg", class: "card-img-top", size: "150x150" %>
+              <% end %>
             <% end %>
             <div class="card-body text-center">
               <h5 class="card-title"><%= link_to item.name,item_path(item) %></h5>

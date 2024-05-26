@@ -4,15 +4,20 @@
       <span class="px-3" style="background-color: #dcdcdc;">検索結果</span>
     </h5>
   </div>
-  
-  <table class="table">
-    <thead>
-    </thead>
-    <tbody>
-      <% @items.each do |item| %>
-      <tr>
-        <td><%= item.name %></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <div class="row">
+    <% @items.each do |item| %>
+      <div class="col-3 mb-3">
+        <div class="card">
+          <% if item.image.attached? %>
+            <%= image_tag item.image, class: "card-img-top", size: "250x150" %>
+          <% else %>
+            <%= image_tag "no_image.jpeg", class: "card-img-top", size: "250x150" %>
+          <% end %>
+          <div class="card-body text-center">
+            <h5 class="card-title"><%= link_to item.name,item_path(item) %></h5>
+            <p class="card-text"><%= number_to_currency(item.with_tax_price, precision: 0) %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>

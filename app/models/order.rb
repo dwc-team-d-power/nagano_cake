@@ -2,6 +2,9 @@ class Order < ApplicationRecord
     has_many :order_details,dependent: :destroy
     belongs_to :customer
     attr_accessor :address_option
+    has_one :ordered_item
+    has_many :ordered_items
+
      has_one_attached :image
     
     enum payment_method: { credit_card: 0, transfer: 1 }

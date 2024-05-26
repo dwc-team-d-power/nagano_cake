@@ -11,7 +11,6 @@ class Admin::OrdersController < ApplicationController
   @order = Order.find(params[:id])
   @customer = @order.customer
   @ordered_items = @order.order_items
-  byebug
   @odered_item = @order.order_item
   end
 

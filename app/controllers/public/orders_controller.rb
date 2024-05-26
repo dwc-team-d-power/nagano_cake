@@ -45,12 +45,12 @@ class Public::OrdersController < ApplicationController
       render :new
     end
   end
-  def index
-    @orders = current_customer.orders.includes(order_details: :item)
-  end    
-  def show
+   def index
+      @orders = current_customer.orders.includes(order_details: :item)
+   end    
+   def show
     @order = Order.find(params[:id])
-  end
+   end
     
   private
 

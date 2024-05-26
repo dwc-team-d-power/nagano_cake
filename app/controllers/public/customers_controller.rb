@@ -7,6 +7,7 @@ class Public::CustomersController < ApplicationController
 
   def information_edit
     @customer = current_customer
+   
   end
 
 def show
@@ -18,7 +19,7 @@ end
     if @customer.update(customer_params)
       flash[:notice]="会員情報が更新されました"
       redirect_to customer_my_page_path
-    else
+    else 
       render :edit 
     end   
   end

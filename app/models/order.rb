@@ -18,4 +18,8 @@ class Order < ApplicationRecord
     def subtotal
       items.with_tax_price*amount
     end 
+    def status_in_japanese
+        I18n.t("enums.order.status.#{status}")
+    end     
 end 
+   

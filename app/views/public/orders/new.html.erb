@@ -37,11 +37,11 @@
         <%= f.label :address, "新しいお届け先", class: "form-check-label" %>
       </div>
       <%= f.label :postal_code, "郵便番号(ハイフンなし)" %>
-      <%= f.text_field :postal_code, class: "form-control" %>
+      <%= f.text_field :postal_code, placeholder: "0000000", class: "form-control" %>
       <%= f.label :address, "住所" %>
-      <%= f.text_field :address, class: "form-control" %>
+      <%= f.text_field :address, placeholder: "東京都渋谷区代々木神園町0-0", class: "form-control" %>
       <%= f.label :name, "宛名" %>
-      <%= f.text_field :name, class: "form-control" %>
+      <%= f.text_field :name, placeholder: "令和道子", class: "form-control" %>
     </div>
     <%= f.submit "確認画面へ進む", class: "btn btn-primary" %>
   </div>
@@ -94,7 +94,7 @@
 <!--    </div>-->
 <!--    <div>-->
 <!--      %= f.label :name, "宛名",class: "col-3" %>-->
-<!--      %= f.text_field :name, placeholder: "令和道子",class: "col-3" %>-->
+<!--      %= f.text_field :name, placeholder: "令和道子", class: "col-3" %>-->
 <!--    </div>-->
 <!--  </div>-->
 <!--</div>-->

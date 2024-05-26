@@ -1,6 +1,6 @@
 <h1>会員情報編集</h1>
 <div class="container mt-4">
-  <%= form_with model: @customer, url: update_customer_information_path, method: :patch do |f| %>
+  <%= form_with model: @customer, url: information_customer_path, method: :patch do |f| %>
     <div class="row mb-3">
       <div class="col-md-2">
         <%= f.label :last_name, "名前", class: "form-label" %>
@@ -15,7 +15,7 @@
 
     <div class="row mb-3">
       <div class="col-md-2">
-        <%= f.label :last_name_kana, "フリガナ", class: "form-label" %>
+        <%= f.label :kana, "フリガナ", class: "form-label" %>
       </div>
       <div class="col-md-5">
         <%= f.text_field :first_name_kana, class: "form-control", id: "first_name_kana" %>
@@ -62,7 +62,7 @@
     </div>
     <div class="col-12 text-center">
       <%= f.submit "更新", class: "btn btn-primary" %>
-      <%= link_to "退会する", customer_unsubscribe_path, class: "btn btn-danger" %><span>退会ページにリンクします</span>
+      <%= link_to "退会する", unsubscribe_customer_path, class: "btn btn-danger" %><span>退会ページにリンクします</span>
     </div>
   <% end %>
 </div>

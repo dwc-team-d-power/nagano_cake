@@ -24,7 +24,7 @@
                 <%= image_tag(item.image.attached? ? url_for(item.image) : 'placeholder.jpg', size: "100x100", class: "card-img-top mx-auto d-block mt-3", alt: item.name) %>
                 <div class="card-body text-center">
                   <h5 class="card-title"><%= item.name %></h5>
-                  <p class="card-text">¥<%= number_to_currency(item.price, unit: "¥", format: "%n") %></p>
+                  <p class="card-text">¥<%= number_to_currency(item.price, unit: "¥", format: "%n",precision:0) %></p>
                 </div>
               </div>
             <% end %>

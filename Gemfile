@@ -54,6 +54,6 @@ end
 
 # Windowsにはzoneinfoファイルが含まれていないため、tzinfo-data gemをバンドルします。
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem "enum_help"
 gem 'devise'
-gem 'enum_help'
-gem 'kaminari','~> 1.2.1'
+gem 'kaminari'

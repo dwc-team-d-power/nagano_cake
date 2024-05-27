@@ -1,9 +1,9 @@
-<h1>ショッピングカート</h1>
-<div class="mb-3">
-  <%= link_to "カートを空にする", destroy_all_cart_items_path, method: :delete, data: { confirm: "カート内の商品を全て削除しますか？" }, class: "btn btn-danger mx-2" %>
+<h1 class="text-center my-4">ショッピングカート</h1>
+<div class="mb-3 text-right">
+  <%= link_to "カートを空にする", destroy_all_cart_items_path, method: :delete, data: { confirm: "カート内の商品を全て削除しますか？" }, class: "btn btn-danger" %>
 </div>
-<table class="table table-striped">
-  <thead>
+<table class="table table-bordered">
+  <thead class="thead-light">
     <tr>
       <th>商品名</th>
       <th>単価(税込)</th>
@@ -15,21 +15,24 @@
   <tbody>
     <% @cart_items.each do |cart_item| %>
       <tr>
-        <td><%= cart_item.item.name %></td>
+        <td>
+          <%= image_tag(cart_item.item.image.attached? ? url_for(cart_item.item.image) : 'placeholder.jpg', size: "50x50", class: "img-thumbnail mr-2") %>
+          <%= cart_item.item.name %>
+        </td>
         <td><%= number_to_currency(cart_item.item.with_tax_price, unit: "￥", precision: 0) %></td>
         <td>
           <%= form_with model: cart_item, local: true, method: :patch do |f| %>
             <div class="input-group">
-              <%= f.select :amount, options_for_select(1..5, cart_item.amount), {}, class: "form-control" %>
+              <%= f.select :amount, options_for_select(1..10, cart_item.amount), {}, class: "form-control" %>
               <div class="input-group-append">
-                <%= f.submit "更新", class: "btn btn-primary" %>
+                <%= f.submit "更新", class: "btn btn-success" %>
               </div>
             </div>
           <% end %>
         </td>
         <td><%= number_to_currency(cart_item.subtotal, unit: "￥", precision: 0) %></td>
         <td>
-          <%= link_to "削除", cart_item_path(cart_item), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+          <%= link_to "削除する", cart_item_path(cart_item), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
         </td>
       </tr>
     <% end %>

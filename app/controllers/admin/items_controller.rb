@@ -1,9 +1,9 @@
 class Admin::ItemsController < ApplicationController
-  # before_action :authenticate_admin!
+  #before_action :authenticate_admin!
   before_action :set_item, only: [:show, :edit, :update]
 
   def index
-    @items = Item.all 
+    @items = Item.all
     # @items = Item.page(params[:page]).per(10)
   end
 
@@ -23,11 +23,11 @@ class Admin::ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
+    # @item = Item.find(params[:id]) 不要: set_itemメソッドで設定されるため
   end
 
   def edit
-    @item = Item.find(params[:id])
+    # @item = Item.find(params[:id]) 不要: set_itemメソッドで設定されるため
   end
 
   def update

@@ -21,15 +21,15 @@ class Public::SessionsController < Devise::SessionsController
   end
 
   protected
-  
+
   def after_sign_in_path_for(resource)
     my_page_customer_path
   end
-  
+
   def after_sign_out_path_for(resource)
     root_path
   end
-  
+
   private
   # アクティブであるかを判断するメソッド
   def customer_state
@@ -43,13 +43,13 @@ class Public::SessionsController < Devise::SessionsController
   return unless customer.is_active == false
   redirect_to new_customer_registration_path
   end
-  
-  protected 
-  
+
+  protected
+
     def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [
-      :first_name, :last_name, :first_name_kana, :last_name_kana, 
+      :first_name, :last_name, :first_name_kana, :last_name_kana,
       :postal_code, :address, :telephone_number, :email, :password, :password_confirmation
     ])
     end
-end   
+end

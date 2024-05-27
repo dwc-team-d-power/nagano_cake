@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-
+  
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
@@ -15,14 +15,13 @@ Rails.application.routes.draw do
     resources :genres, only: [:index, :create, :edit, :update]
     resources :customers, only: [:index, :show, :edit, :update]
     resources :orders, only: [:show, :index, :update] do
-    resources :order_details, only: [:update]
+      resources :order_details, only: [:update]
     end
   end
 
   scope module: :public do
     root 'homes#top'
     get '/about' => 'homes#about', as: 'about'
-
 
     resources :items, only: [:index, :show]
     resource :customer, only: [] do
@@ -32,13 +31,6 @@ Rails.application.routes.draw do
       get 'unsubscribe', to: 'customers#unsubscribe', as: 'unsubscribe'
       patch 'withdraw', to: 'customers#withdraw', as: 'withdraw'
     end
-
-    # get 'customers/my_page' => 'customers#my_page', as: 'customer_my_page'
-    # get 'customers/information/edit' => 'customers#information_edit', as: 'edit_customer_information'
-    # patch 'customers/information/edit' => 'customers#update', as: 'update_customer_information'
-    # get 'customers/unsubscribe' => 'customers#unsubscribe', as: 'customer_unsubscribe'
-    # patch 'customers/withdraw' => 'customers#withdraw', as: 'customer_withdraw'
-
 
     resources :cart_items, only: [:index, :update, :destroy, :create] do
       collection do
@@ -55,5 +47,6 @@ Rails.application.routes.draw do
 
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
   end
+
   get 'search' => "searches#search"
 end

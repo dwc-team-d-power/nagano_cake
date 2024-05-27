@@ -1,5 +1,5 @@
 class Public::CustomersController < ApplicationController
-  before_action :authenticate_customer!
+   #before_action :authenticate_customer!
   
   def my_page
     @customer = current_customer
@@ -7,7 +7,12 @@ class Public::CustomersController < ApplicationController
 
   def information_edit
     @customer = current_customer
+   
   end
+
+def show
+   @customer = current_customer
+end
 
   def update
     @customer = current_customer

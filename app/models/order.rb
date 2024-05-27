@@ -6,7 +6,7 @@ class Order < ApplicationRecord
     has_many :ordered_items
 
      has_one_attached :image
-
+    
     enum payment_method: { credit_card: 0, transfer: 1 }
     enum status:{ payment_confirmation:0,production:1,preparation_for_shipping:2,sent:3}
     def full_address
@@ -20,5 +20,6 @@ class Order < ApplicationRecord
     end
     def status_in_japanese
         I18n.t("enums.order.status.#{status}")
-    end
-end
+    end     
+end 
+   

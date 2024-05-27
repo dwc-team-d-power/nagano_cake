@@ -8,6 +8,7 @@ class Public::OrdersController < ApplicationController
 
   def confirm
     @order = Order.new(order_params)
+
     @order.customer_id = current_customer.id
     @order.shipping_cost = 800
     @order.total_payment = calculate_total_payment
@@ -27,6 +28,7 @@ class Public::OrdersController < ApplicationController
       # すでにフォームから送信されたデータが@orderにセットされているので何もしない
     end
     render :confirm
+
   end
 
   def create
@@ -53,15 +55,15 @@ class Public::OrdersController < ApplicationController
     end
   end
 
-  def index
-    @orders = current_customer.orders.includes(order_details: :item)
-  end
-
-  def show
+   def index
+      @orders = current_customer.orders.includes(order_details: :item)
+   end    
+   def show
     @order = Order.find(params[:id])
-  end
-
+   end
+    
   private
+
 
   def order_params
     params.require(:order).permit(:payment_method, :address, :postal_code, :name)

@@ -72,5 +72,5 @@
       <p><strong>送料</strong>: <%= number_to_currency(@order.shipping_cost, unit: "¥", precision: 0) %></p>
       <p><strong>請求金額合計</strong>: <%= number_to_currency(@order.total_payment, unit: "¥", precision: 0) %></p>
     </div>
-  <%= paginate orders %>
+  <%= paginate @orders %>
 </div> 

@@ -7,6 +7,7 @@ class Admin::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    @orders = Order.page(params[:page])
     @customer = @order.customer
     @order_details = @order.order_details
   end

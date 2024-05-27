@@ -4,8 +4,7 @@ class Public::CartItemsController < ApplicationController
   def index
     @cart_items = current_customer.cart_items.includes(:item)
   end
-
-  def create
+ def create
     existing_cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
   if existing_cart_item
     # 存在した場合
@@ -28,7 +27,8 @@ class Public::CartItemsController < ApplicationController
       redirect_to item_path(params[:cart_item][:item_id])
     end
   end
-
+ end
+    
   def update
     @cart_item = current_customer.cart_items.find(params[:id])
     if @cart_item.update(cart_item_params)
@@ -57,7 +57,7 @@ class Public::CartItemsController < ApplicationController
   private
 
   def cart_item_params
-    params.require(:cart_item).permit(:item_id, :amount)
+    params.require(:cart_item).permit(:item_id,:amount)
   end
   end
 end

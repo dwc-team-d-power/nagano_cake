@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Admin::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
 
@@ -19,6 +17,10 @@ class Admin::SessionsController < Devise::SessionsController
   end
 
 
+  def after_sign_out_path_for(resource_or_scope)
+    admin_session_path
+  end
+  
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.

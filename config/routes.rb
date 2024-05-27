@@ -23,12 +23,22 @@ Rails.application.routes.draw do
     root 'homes#top'
     get '/about' => 'homes#about', as: 'about'
 
+
     resources :items, only: [:index, :show]
-    get 'customers/my_page' => 'customers#my_page', as: 'customer_my_page'
-    get 'customers/information/edit' => 'customers#information_edit', as: 'edit_customer_information'
-    patch 'customers/information/edit' => 'customers#update', as: 'update_customer_information'
-    get 'customers/unsubscribe' => 'customers#unsubscribe', as: 'customer_unsubscribe'
-    patch 'customers/withdraw' => 'customers#withdraw', as: 'customer_withdraw'
+    resource :customer, only: [] do
+      get 'my_page', to: 'customers#my_page', as: 'my_page'
+      get 'information/edit', to: 'customers#information_edit', as: 'edit_information'
+      patch 'information', to: 'customers#update', as: 'information'
+      get 'unsubscribe', to: 'customers#unsubscribe', as: 'unsubscribe'
+      patch 'withdraw', to: 'customers#withdraw', as: 'withdraw'
+    end
+
+    # get 'customers/my_page' => 'customers#my_page', as: 'customer_my_page'
+    # get 'customers/information/edit' => 'customers#information_edit', as: 'edit_customer_information'
+    # patch 'customers/information/edit' => 'customers#update', as: 'update_customer_information'
+    # get 'customers/unsubscribe' => 'customers#unsubscribe', as: 'customer_unsubscribe'
+    # patch 'customers/withdraw' => 'customers#withdraw', as: 'customer_withdraw'
+
 
     resources :cart_items, only: [:index, :update, :destroy, :create] do
       collection do

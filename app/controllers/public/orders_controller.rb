@@ -32,6 +32,9 @@ class Public::OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
+    @order.shipping_cost = 800  # shipping_costを設定
+    @order.total_payment = calculate_total_payment
+
     if @order.save
       # カート内アイテムの処理
       current_customer.cart_items.each do |cart_item|
@@ -49,20 +52,22 @@ class Public::OrdersController < ApplicationController
       render :new
     end
   end
-   def index
-      @orders = current_customer.orders.includes(order_details: :item)
-   end    
-   def show
+
+  def index
+    @orders = current_customer.orders.includes(order_details: :item)
+  end
+
+  def show
     @order = Order.find(params[:id])
-   end
-    
+  end
+
   private
 
   def order_params
-    params.require(:order).permit(:payment_method, :address_option,:postal_code, :address, :name)
+    params.require(:order).permit(:payment_method, :address, :postal_code, :name)
   end
-  
- def calculate_total_payment
+
+  def calculate_total_payment
     current_customer.cart_items.sum(&:subtotal) + 800 # 固定の送料を追加
- end
+  end
 end

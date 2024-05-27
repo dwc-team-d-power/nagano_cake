@@ -10,7 +10,6 @@
         <% end %>
       </ul>
     </div>
-
     <div class="col-md-9">
       <h1 class="text-center">ようこそながのCAKEへ！</h1>
       <p class="text-center">このサイトは、ケーキ販売のECサイトになります。会員でない方も商品の閲覧はできますが、購入には会員登録が必要になります。</p>
@@ -24,14 +23,14 @@
                 <%= image_tag(item.image.attached? ? url_for(item.image) : 'placeholder.jpg', size: "100x100", class: "card-img-top mx-auto d-block mt-3", alt: item.name) %>
                 <div class="card-body text-center">
                   <h5 class="card-title"><%= item.name %></h5>
-                  <p class="card-text">¥<%= number_to_currency(item.price, unit: "¥", format: "%n") %></p>
+                  <p class="card-text">¥<%= number_to_currency(item.price, unit: "¥", precision: 0, format: "%n") %></p>
                 </div>
               </div>
             <% end %>
           </div>
         <% end %>
       </div>
-
+      
       <div class="text-center mt-4">
         <%= link_to "全ての商品を見る", items_path, class: "btn btn-primary" %>
       </div>

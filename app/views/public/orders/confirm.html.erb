@@ -1,0 +1,86 @@
+<div class="container-fluid">
+  <div class="row">
+    <h5 class="col-4 text-center my-4">
+      <span class="px-3" style="background-color: #dcdcdc;">注文情報確認</span>
+    </h5>
+  </div>
+  <div class="row">
+    <div class="col-8">
+      <table class="table table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th class="col-6">商品名</th>
+            <th class="col-2">単価(税込)</th>
+            <th class="col-2">数量</th>
+            <th class="col-2">小計</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% current_customer.cart_items.each do |cart_item| %>
+            <tr>
+              <td>
+                <%= image_tag(cart_item.item.image.attached? ? url_for(cart_item.item.image) : 'placeholder.jpg', size: "50x50", class: "img-thumbnail mr-2") %>
+                <%= cart_item.item.name %>
+              </td>
+              <td><%= number_to_currency(cart_item.item.with_tax_price, unit: "￥", precision: 0) %></td>
+              <td><%= cart_item.amount %></td>
+              <td><%= number_to_currency(cart_item.subtotal, unit: "￥", precision: 0) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <% subtotal = current_customer.cart_items.sum(&:subtotal) %>
+    <% shipping_cost = 800 %>
+    <% total_payment = subtotal + shipping_cost %>
+
+    <div class="col-3">
+      <table class="table table-bordered">
+        <tr>
+          <td class="table-active">送料</td>
+          <td><%= number_to_currency(shipping_cost, unit: "￥", precision: 0) %></td>
+        </tr>
+        <tr>
+          <td class="table-active">商品合計</td>
+          <td><%= number_to_currency(subtotal, unit: "￥", precision: 0) %></td>
+        </tr>
+        <tr>
+          <td class="table-active">請求金額</td>
+          <td><%= number_to_currency(total_payment, unit: "￥", precision: 0) %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-2">
+      <h5><strong>支払方法</strong></h5>
+    </div>
+    <div class="col-6">
+      <p><%= @order.payment_method == 'credit_card' ? 'クレジットカード' : '銀行振込' %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2">
+      <h5><strong>お届け先</strong></h5>
+    </div>
+    <div class="col-6">
+      <p>〒 <%= @order.postal_code %> <%= @order.address %><br>
+      <%= @order.name %></p>
+    </div>
+  </div>
+  <div class="row w-100 justify-content-center mt-3">
+    <div>
+      <%= form_with model: @order, url: orders_path, method: :post, local: true do |f| %>
+        <%= f.hidden_field :payment_method %>
+        <%= f.hidden_field :address %>
+        <%= f.hidden_field :postal_code %>
+        <%= f.hidden_field :name %>
+        <%= f.submit "注文を確定する", class: "btn btn-success" %>
+      <% end %>
+    </div>
+    <div class="ml-2">
+      <%= link_to '注文情報入力に戻る', new_order_path, class: 'btn btn-secondary' %>
+    </div>
+  </div>
+</div>

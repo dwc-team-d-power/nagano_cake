@@ -1,0 +1,41 @@
+<div class="container mt-4">
+  <p class="text-center">会員の方はこちらからログイン</p>
+  <%= form_with(model: resource, as: resource_name, url: session_path(resource_name), local: true) do |f| %>
+    <div class="row mb-3 justify-content-center">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :email, "メールアドレス", class: "form-label" %>
+          <%= f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3 justify-content-center">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :password, "パスワード", class: "form-label" %>
+          <%= f.password_field :password, class: "form-control", autocomplete: "current-password" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3 justify-content-center">
+      <div class="col-md-6">
+        <div class="form-group form-check">
+          <%= f.check_box :remember_me, class: "form-check-input" %>
+          <%= f.label :remember_me, "ログイン情報を保存する", class: "form-check-label" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-3 justify-content-center">
+      <div class="col-md-6 text-center">
+        <%= f.submit "ログイン", class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="text-center mt-4">
+    <h3><span>会員登録がお済でない方</span></h3>
+    <%= link_to "こちら", new_customer_registration_path, class: "btn btn-link" %>から新規登録を行ってください。
+  </div>

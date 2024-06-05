@@ -1,17 +1,27 @@
-
 <!DOCTYPE html>
 <html>
   <head>
-    <title>WorkGithub</title>
+    <title>Nagano_Cake</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+<<<<<<< HEAD
+    
+    <script src="https://kit.fontawesome.com/ae44b1616f.js" crossorigin="anonymous"></script>
+=======
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/96781c3f85.js" crossorigin="anonymous"></script>
+
+>>>>>>> origin/takahaya
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
 
   <body>
-    <%= yield %>
+    <%= render 'layouts/header' %>
+    <div>
+      <%= flash[:notice]%>
+      <%= yield %>
+    </div>
+    <%= render 'layouts/footer' %>
   </body>
 </html>

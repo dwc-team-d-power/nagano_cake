@@ -1,6 +1,6 @@
 class Admin::CustomersController < ApplicationController
-  # before_action :authenticate_admin!
-  #  before_action :set_customer, only: [:show, :edit, :update]
+  before_action :authenticate_admin!
+  before_action :set_customer, only: [:show, :edit, :update, :destroy, :restore]
 
   def index
     @customers = Customer.page(params[:page])
@@ -9,9 +9,13 @@ class Admin::CustomersController < ApplicationController
   def show
     @customer = Customer.find(params[:id])
   end
+  
+  def destroy
+    @customer.destroy
+    redirect_to admin_customers_path, notice: "顧客情報を削除しました。"
+  end
 
   def edit
-    @customer = Customer.find(params[:id])
   end
 
   def update
@@ -24,24 +28,9 @@ class Admin::CustomersController < ApplicationController
     end
   end
 
-  private
-
-  def set_customer
-    @customer = Customer.find(params[:id])
-  end
-
-  def customer_params
-    params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :postal_code, :address, :telephone_number, :email, :is_active)
-  end
-  def customer_restore
-    @admin_customer = Customer.deleted.find(params[:id]).restore
-    redirect_to admin_customers_path
-  end
-
-  private
-
-  def customer_params
-    params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :email, :address, :postcode, :phone_number, :is_deleted)
+  def restore
+    @customer.restore
+    redirect_to admin_customers_path, notice: "顧客情報を復元しました。"
   end
 
   private
@@ -53,16 +42,4 @@ class Admin::CustomersController < ApplicationController
   def customer_params
     params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :postal_code, :address, :telephone_number, :email, :is_active)
   end
-  
-  def customer_restore
-    @admin_customer = Customer.deleted.find(params[:id]).restore
-    redirect_to admin_customers_path
-  end
-
-  def destroy
-    @admins_customer = Customer.find(params[:id])
-    @admins_customer.destroy
-    redirect_to admin_customers_path
-  end
-  
 end
